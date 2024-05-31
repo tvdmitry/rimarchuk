@@ -1,4 +1,4 @@
-# Link on project 
+# Link to the project
 
 https://t.me/marina_rimarchuk_test_bot
 
