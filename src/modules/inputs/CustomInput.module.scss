@@ -1,0 +1,50 @@
+.customInput {
+  margin-bottom: 12px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.label {
+  position: relative;
+  display: block;
+}
+
+.title {
+  position: absolute;
+  font-size: 16px;
+  color: white;
+  transition: all .15s;
+  left: 16px;
+  top: 50%;
+  color: rgba(235, 235, 245);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.field {
+  border-radius: 10px;
+  height: 54px;
+  width: 100%;
+  background: #1D1939;
+  padding: 20px 16px 8px;
+  color: #FFF;
+  border: #1D1939;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.442px;
+  outline: none;
+}
+
+.fieldFilled + .title, .field:focus + .title {
+  font-size: 12px;
+  color: rgba(235, 235, 245, 0.60);
+  top: 8px;
+  transform: translateY(0);
+}
+
+.error {
+  font-size: 12px;
+  color: orangered;
+}

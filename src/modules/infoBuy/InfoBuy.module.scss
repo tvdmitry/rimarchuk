@@ -1,0 +1,91 @@
+.infoBuy {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+
+  .infoBuyChildren {
+    margin-bottom: 24px;
+  }
+
+  .contentTitle {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.8px;
+    margin-bottom: 12px;
+  }
+
+  .contentDescription {
+    color: #C2C5F3;
+    padding: 0;
+    font-size: 14px;
+    letter-spacing: -0.154px;
+    margin-bottom: 24px;
+
+    ul {
+      padding-left: 16px;
+    }
+  }
+
+  .contentCostButton {
+    border-radius: 16px;
+    background: #0D0A36;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+
+    .contentCostLink {
+      display: flex;
+      align-items: center;
+      padding: 18px 24px;
+      gap: 14px;
+      min-height: 64px;
+
+      .contentCostText {
+        flex: 0 1 auto;
+        color: #C2C5F3;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+      }
+
+      .contentCostPrice {
+        //flex: 0 1 90px;
+        color: #FFF;
+        white-space: nowrap;
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: -0.8px;
+
+        .contentCostPriceManual {
+          display: flex;
+          align-items: center;
+          gap: 30px;
+        }
+      }
+    }
+  }
+
+  .contentPriceButton {
+    border-radius: 16px;
+    background: #2545ED;
+
+    .contentPriceLink {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 17px 16px;
+      max-height: 56px;
+
+      .contentPriceText {
+        color: #FFF;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: -0.32px;
+      }
+    }
+  }
+
+  .contentBookShow {
+    margin-top: 75px;
+    object-fit: contain;
+  }
+}

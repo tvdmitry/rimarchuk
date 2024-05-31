@@ -1,0 +1,72 @@
+.statisticLevelWrapper {
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  background: linear-gradient(90deg, #160F35 0%, #1D1C48 100%), #FFF;
+  margin-bottom: 24px;
+
+  .levelCard {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 16px 18px 16px;
+
+    .levelCurrent {
+      display: flex;
+      margin-bottom: 23px;
+      align-items: center;
+
+      .currentIcon {
+        display: inline-flex;
+        min-width: 56px;
+        height: 56px;
+        margin-right: 28px;
+      }
+
+      .currentInfo {
+        display: flex;
+        flex-direction: column;
+
+        .infoTitle {
+          font-size: 22px;
+          font-weight: 600;
+          letter-spacing: -0.8px;
+          margin-bottom: 2px;
+        }
+
+        .infoDescription {
+          color: #C2C5F3;
+          font-size: 14px;
+          letter-spacing: -0.154px;
+        }
+      }
+    }
+
+    .completeLevel {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 29px;
+
+      .completeTitle {
+        color: #C2C5F3;
+        letter-spacing: -0.154px;
+        margin-bottom: 12px;
+      }
+    }
+
+    .watchQuestion {
+      display: flex;
+      justify-content: center;
+      border-radius: 16px;
+      background: #2545ED;
+      padding: 17px 16px;
+      align-items: center;
+
+      .watchText {
+        color: #FFF;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: -0.32px;
+      }
+    }
+  }
+}

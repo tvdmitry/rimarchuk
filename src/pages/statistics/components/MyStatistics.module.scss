@@ -1,0 +1,39 @@
+.myStatistics {
+  display: flex;
+  flex-direction: column;
+
+  &::before {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-image: url('@/assets/images/statistics/leftBack.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 50%;
+    width: 70%;
+    height: 100vh;
+    z-index: -1;
+  }
+
+  &::after {
+    content: '';
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-image: url('@/assets/images/statistics/rightBack.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 20% 50%;
+    width: 70%;
+    height: 100vh;
+    z-index: -1;
+  }
+
+  .myStatisticsTitle {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.8px;
+    margin-bottom: 11px;
+  }
+}

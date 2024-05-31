@@ -1,0 +1,19 @@
+.coursesPage {
+  &::before {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-image: url('@/assets/images/courses/back.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% top;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+  }
+}
+
+.courseTextPage {
+  margin-bottom: 20px;
+}

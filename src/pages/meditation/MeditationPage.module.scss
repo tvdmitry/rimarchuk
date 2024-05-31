@@ -1,0 +1,20 @@
+.meditationPage {
+  display: flex;
+  flex-direction: column;
+
+  .meditationWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+
+    .cardOneBackground {
+      border-radius: 20px;
+      background: radial-gradient(circle at top left, rgba(153, 23, 255, 0.45), rgba(153, 23, 255, 0.2) 30%, rgb(33, 26, 65) 65%)
+    }
+
+    .cardTwoBackground {
+      border-radius: 20px;
+      background: radial-gradient(circle at top left, rgba(255, 23, 107, 0.45), rgba(255, 23, 107, 0.2) 30%, rgb(33, 26, 65) 65%)
+    }
+  }
+}

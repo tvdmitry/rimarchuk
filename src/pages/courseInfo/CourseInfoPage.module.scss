@@ -1,0 +1,13 @@
+.courseInfoPage::before {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-image: url('@/assets/images/course/back.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+    width: 100%;
+    height: 70vh;
+    z-index: -1;
+}

@@ -1,0 +1,34 @@
+.deliveryHeader {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  display: block;
+  margin: 24px 0;
+}
+
+.deliveryForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.disabledButton {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.contentPriceButton {
+  margin-top: 16px;
+  border-radius: 16px;
+  background-color: #2545ED;
+  height: 56px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.15s;
+
+  &:hover {
+    background-color: darken(#2545ED, 10%);
+  }
+}

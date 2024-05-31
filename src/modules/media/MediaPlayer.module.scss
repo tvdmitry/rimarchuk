@@ -1,0 +1,110 @@
+.mediaPlayer {
+  margin-top: 30px;
+  position: relative;
+  min-width: 290px;
+  min-height: 350px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .mediaTitle {
+    position: absolute;
+    bottom: 26px;
+    left: 0;
+  }
+}
+
+.title {
+  color: #C2C5F3;
+  padding: 0 31px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.playButton {
+  cursor: pointer;
+  border: 0;
+}
+
+.controlsPlay {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+
+  .prevButton {
+    cursor: pointer;
+
+    &:before {
+      display: inline-flex;
+      border-radius: 12px;
+      width: 6px;
+      height: 22.923px;
+      background: #C2C5F3;
+      content: '';
+    }
+  }
+
+  .nextButton {
+    cursor: pointer;
+
+    &:after {
+      display: inline-flex;
+      border-radius: 12px;
+      width: 6px;
+      height: 22.923px;
+      background: #C2C5F3;
+      content: '';
+    }
+  }
+}
+
+.mediaDuration {
+  display: flex;
+  margin-top: 23px;
+  align-items: center;
+  flex-direction: column;
+
+  .progressBarContainer {
+    position: relative;
+    width: 100%;
+  }
+
+  input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 12px;
+    width: 12px;
+    background: #C2C5F3;
+    border-radius: 50%;
+    border: 1px solid #C2C5F3;
+    cursor: pointer;
+  }
+
+  input {
+    -webkit-appearance: none !important;
+    height: 6px;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 100px;
+    background: #1A1741;
+  }
+}
+
+.time {
+  margin-top: 12px;
+  margin-bottom: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(194, 197, 243, 0.40);
+  font-size: 12px;
+}
+
+.timeline {
+  width: 100%;
+}

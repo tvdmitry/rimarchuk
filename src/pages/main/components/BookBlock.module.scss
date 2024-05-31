@@ -1,0 +1,16 @@
+.bookBlock {
+  margin-top: 28px;
+
+  .cardBackground {
+    border-radius: 20px;
+    margin-right: 12px;
+    background: linear-gradient(65deg, rgb(170, 141, 54), rgb(33, 26, 65) 40%);
+  }
+
+  .bookPart {
+    color: #4563FF;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.442px;
+  }
+}

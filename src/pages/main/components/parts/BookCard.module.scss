@@ -1,0 +1,74 @@
+.bookCard {
+  display: grid;
+  grid-template-columns: minmax(100px, 2fr) 4fr;
+  align-items: center;
+  gap: 26px;
+  height: 188px;
+  overflow: hidden;
+  //padding: 16px;
+  border-radius: 20px;
+
+  &[data-index="0"], &[data-index="1"], &[data-index="2"], &[data-index="3"] {
+    background: linear-gradient(65deg, rgb(170, 141, 54), rgb(33, 26, 65) 40%);
+  }
+
+  .bookImage {
+    max-height: 225px;
+    display: flex;
+    align-items: baseline;
+    object-fit: contain;
+    max-width: 269px;
+    position: relative;
+    right: 3px;
+  }
+
+  .bookTitleCard {
+    text-transform: uppercase;
+  }
+
+  .bookInfo {
+    padding: 2px 8px 0 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+
+    .bookTitle {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 16px;
+      letter-spacing: -0.442px;
+      margin-bottom: 8px;
+    }
+
+    .bookDescription {
+      color: #C2C5F3;
+      font-size: 11px;
+      line-height: 17px;
+      flex: 1 1 auto;
+      margin-bottom: 9px;
+    }
+
+    .linkBook {
+      display: flex;
+
+      .bookWrapper {
+        display: flex;
+        min-width: 120px;
+        max-height: 34px;
+        justify-content: center;
+        padding: 8px 16px;
+        align-items: center;
+        border-radius: 16px;
+        background: #493AC0;
+
+        .bookDetails {
+          color: #FFF;
+          text-align: center;
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: -0.154px;
+        }
+      }
+    }
+  }
+}

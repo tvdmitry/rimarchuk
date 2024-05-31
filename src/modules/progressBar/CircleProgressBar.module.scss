@@ -1,0 +1,35 @@
+.circleProgressBar {
+  position: relative;
+  margin-right: 22px;
+
+  .circleBackground {
+    fill: none;
+    stroke: #160F36;
+  }
+
+  .circleProgress {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .percent {
+    display: flex;
+    width: 32px;
+    height: 17px;
+    position: absolute;
+    top: 69px;
+    left: 26px;
+    padding: 2.125px 4.25px;
+    justify-content: center;
+    border-radius: 106.25px;
+    background: #C2C5F3;
+
+    .number {
+      font-size: 10px;
+      font-weight: 600;
+      background: transparent;
+      color: #0B0526;
+    }
+  }
+}

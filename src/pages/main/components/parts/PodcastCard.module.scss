@@ -1,0 +1,48 @@
+.podcastCardWrapper {
+  display: block;
+
+  .podcastCard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border-radius: 20px;
+    padding: 16px 16px 80px;
+    height: 160px;
+
+    &[data-index="0"], &[data-index="2"] {
+      background:  radial-gradient(circle at top left, #242C7F, #22266D 10%, transparent 65%),
+      url("../../../../assets/images/podcastsCard/podcastBack.png") center center / cover no-repeat;
+    }
+
+    &[data-index="1"], &[data-index="3"] {
+      background:  radial-gradient(circle at top left, #242C7F, #22266D 10%, transparent 65%),
+      url("../../../../assets/images/podcastsCard/podcastTwo.png") center center / cover no-repeat;
+    }
+
+    .cardTitle {
+      color: #C2C5F3;
+      font-size: 12px;
+      letter-spacing: -0.24px;
+      margin-bottom: 8px;
+    }
+
+    .cardTime {
+      color: rgba(194, 197, 243, 0.40);
+      font-size: 11px;
+      line-height: 13px;
+      letter-spacing: 0.066px;
+    }
+
+    .playIcon {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      height: 80px;
+    }
+
+    .podcastTitleCard {
+      font-size: 12px;
+    }
+  }
+}

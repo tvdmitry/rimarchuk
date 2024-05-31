@@ -1,0 +1,11 @@
+.mediaPodcastPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.mediaPodcast {
+  &[data-index="1"], &[data-index="2"], &[data-index="3"], &[data-index="4"]  {
+    background:  radial-gradient(circle at top left, #242C7F, #242C7F 15%, transparent 45%),
+    url("../../../../assets/images/podcastsCard/podcastBack.png") center center / cover no-repeat
+  }
+}

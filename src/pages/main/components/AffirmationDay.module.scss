@@ -1,0 +1,23 @@
+.affirmationDay {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 25px;
+  position: relative;
+  background-color: #181959;
+  background-image: url("../../../assets/images/affirmationDay/back.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 10px 16px;
+  border-bottom-left-radius: 50px;
+  height: 300px;
+  width: calc(100% + 30px);
+  margin-left: -15px;
+
+  .affirmationRibbon {
+    position: absolute;
+    right: -101px;
+    bottom: -123px;
+  }
+}

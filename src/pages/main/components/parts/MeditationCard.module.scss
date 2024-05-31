@@ -1,0 +1,49 @@
+.meditationCardWrapper {
+  display: flex;
+  height: 100%;
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 16px 16px 80px;
+    border-radius: 20px;
+    height: 160px;
+
+    &[data-index="0"], &[data-index="1"] {
+      background: radial-gradient(circle at top left, rgba(153, 23, 255, 0.45), rgba(153, 23, 255, 0.2) 30%, rgb(33, 26, 65) 65%)
+    }
+
+    &[data-index="2"] {
+      background: radial-gradient(circle at top left, rgba(255, 23, 107, 0.45), rgba(255, 23, 107, 0.2) 30%, rgb(33, 26, 65) 65%)
+    }
+
+    &[data-index="3"] {
+      background: radial-gradient(circle at top left, rgba(23, 255, 116, 0.45), rgba(23, 255, 116, 0.2) 30%, rgb(33, 26, 65) 65%)
+    }
+  }
+
+  .cardTitle {
+    color: #C2C5F3;
+    font-size: 15px;
+    line-height: 18px;
+    flex: 0 1 36px;
+    letter-spacing: -0.24px;
+    margin-bottom: 8px;
+  }
+
+  .cardTime {
+    color: rgba(194, 197, 243, 0.40);
+    font-size: 11px;
+    line-height: 13px;
+    letter-spacing: 0.066px;
+  }
+
+  .playIcon {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    height: 80px;
+  }
+}

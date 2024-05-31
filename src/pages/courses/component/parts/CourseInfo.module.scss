@@ -1,0 +1,83 @@
+.coursesWrapper {
+  margin-bottom: 24px;
+  width: 100%;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .courseTitle {
+    color: #C2C5F3;
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    letter-spacing: -0.442px;
+  }
+
+  .courseCardBlock {
+    opacity: 0.5;
+  }
+
+  .courseInfoCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 8px;
+    min-height: 100px;
+    border-radius: 24px;
+    background: linear-gradient(90deg, #160F35 0%, #1D1C48 100%), #FFF;
+    padding: 20px 16px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .courseLink {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .courseInfoIcon {
+      display: inline-flex;
+      border-radius: 12px;
+      align-items: center;
+      flex: 0 0 80px;
+      min-width: 80px;
+      min-height: 60px;
+      margin-right: 16px;
+    }
+
+    .courseInfoText {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .courseInfoTitle {
+      letter-spacing: -0.154px;
+      color: #FFF;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .courseInfoDescription {
+      color: #C2C5F3;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .coursePlayIcon {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 36px;
+      min-width: 36px;
+      min-height: 36px;
+      margin-left: 16px;
+    }
+  }
+}

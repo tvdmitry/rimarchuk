@@ -1,0 +1,30 @@
+.mainMenu {
+  position: fixed;
+  bottom: 40px;
+  transform: translateX(-50%);
+  left: 50%;
+  display: flex;
+  border: 1px solid rgba(50, 49, 65, 0.39);
+  border-radius: 100px;
+  background: linear-gradient(180deg, rgba(22, 15, 54, 0.50) 0%, rgba(13, 6, 45, 0.50) 100%);
+  backdrop-filter: blur(25px);
+  width: 216px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.20);
+  z-index: 999999999999999999999999;
+
+  .mainLink {
+    opacity: 0.16;
+    padding: 12px 24px;
+
+    .mainIcon {
+      display: flex;
+    }
+  }
+
+  .activeLink {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,27 @@
+.videoPlayerContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.previewContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reactPlayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

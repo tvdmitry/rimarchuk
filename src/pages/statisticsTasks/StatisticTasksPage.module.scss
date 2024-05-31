@@ -1,0 +1,33 @@
+.statisticTasksPage {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+
+  &::before {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-image: url('@/assets/images/statistics/leftBack.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+  }
+
+  &::after {
+    content: '';
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-image: url('@/assets/images/tasks/rightBack.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+  }
+}

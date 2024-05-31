@@ -1,0 +1,13 @@
+.waterTrackerHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  align-items: baseline;
+
+  .trackerTitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.442px;
+  }
+}

@@ -1,0 +1,46 @@
+.statisticsWrapper {
+  display: flex;
+  flex-direction: column;
+
+  .statisticsPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+    margin-bottom: 48px;
+
+    .userAvatar {
+      display: flex;
+      border-radius: 120px;
+      margin-bottom: 20px;
+
+      .loader {
+        width: 100px;
+        height: 100px;
+        border: 2px solid #FFF;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+      }
+
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+
+    .username {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+  }
+}
