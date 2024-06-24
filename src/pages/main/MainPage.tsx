@@ -1,27 +1,28 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { ThunkDispatch } from '@reduxjs/toolkit';
+import { ThunkDispatch } from '@reduxjs/toolkit'
 
-import { Menu } from '@/modules/menu/Menu';
-import { PodcastsBlock } from '@/modules/podcastsBlock/PodcastsBlock';
-import { VideoBlock } from '@/modules/videoBlock/VideoBlock';
-import { getAffirmationAll } from '@/store/affirmationSlice';
-import { authToken } from '@/store/authSlice';
-import { getUser } from '@/store/currentUserSlice';
-import { addNewUser, getUsersAll } from '@/store/userSlice';
-import { getVideosAll } from '@/store/videosSlice';
-import { useTelegram } from '@/utils/hooks/useTelegram';
-import { AllUsers, AuthResponse, AuthUser, UserResponse } from '@/utils/types';
-
-import css from './Main.module.scss';
-import { AffirmationDay } from './components/AffirmationDay';
-import { BookBlock } from './components/BookBlock';
-import { WaterTracker } from './components/WaterTracker';
+import { Menu } from '@/modules/menu/Menu'
+import { PodcastsBlock } from '@/modules/podcastsBlock/PodcastsBlock'
+import { VideoBlock } from '@/modules/videoBlock/VideoBlock'
+import { getAffirmationAll } from '@/store/affirmationSlice'
+import { authToken } from '@/store/authSlice'
+import { getUser } from '@/store/currentUserSlice'
+import { setOpen } from '@/store/modalsSlice'
+import { addNewUser, getUsersAll } from '@/store/userSlice'
+import { getVideosAll } from '@/store/videosSlice'
+import { useTelegram } from '@/utils/hooks/useTelegram'
+import { AllUsers, AuthResponse, AuthUser, UserResponse } from '@/utils/types'
+import css from './Main.module.scss'
+import { AffirmationDay } from './components/AffirmationDay'
+import { BookBlock } from './components/BookBlock'
+import { WaterTracker } from './components/WaterTracker'
 
 const MainPage = () => {
     const { initDataUnsafe } = useTelegram();
     const [isMobile, setIsMobile] = useState(window.innerWidth < 500);
+    const [show, setShow] = useState(true);
     /* const [userTokenFetched, setUserTokenFetched] = useState(false);*/
     const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
     const userId: number = initDataUnsafe?.user?.id;
@@ -47,20 +48,22 @@ const MainPage = () => {
     const authUser: AuthUser = useSelector((state: AuthResponse) => state.auth);
     const allUsers: AllUsers = useSelector((state: UserResponse) => state.user);
 
-    // console.log(authUser, 'authUser');
-    // console.log(allUsers.data.length, 'allUsers.data.length');
+    console.log(authUser, 'authUser');
+    console.log(allUsers.data.length, 'allUsers.data.length');
 
     useEffect(() => {
         const fetchData = async () => {
             if (!allUsers.data.length) {
                 await dispatch(getUsersAll());
             }
-
+            console.log(allUsers.data, 'allUsers.data');
             if (userId && userName) {
+                console.log('fetchData', userId, userName);
                 const isIdExists = allUsers.data.some((user) => +user.user_id === +userId);
                 if (!isIdExists) {
+                    dispatch(setOpen(true));
                     await dispatch(addNewUser({ user_id: +userId, user_name: userName }));
-                    dispatch(authToken(Number(userId)));
+                    await dispatch(authToken(Number(userId)));
                 } else {
                     await dispatch(authToken(Number(userId)));
                     await dispatch(getAffirmationAll());
@@ -82,6 +85,7 @@ const MainPage = () => {
     useEffect(() => {
         const fetchUser = async () => {
             if (authUser.user[0]) {
+                console.log('fetchUser', authUser.user[0].api_token);
                 localStorage.setItem('api_token', authUser.user[0].api_token);
                 await dispatch(getUser());
             }

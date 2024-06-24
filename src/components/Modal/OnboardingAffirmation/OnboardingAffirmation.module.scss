@@ -1,0 +1,94 @@
+.ModalWindow {
+	position: absolute;
+  left: -120px;
+  top: -200px;
+
+  width: 614px;
+	height: 614px;
+	border-radius: 60%;
+  background-color: #2545ED;
+  cursor: default;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 9999;
+}
+
+.ModalWindow.open {
+	opacity: 1;
+	transform: translate(0, 0);
+}
+
+@keyframes slideInFromTopMiddle {
+	0% {
+		opacity: 0;
+		transform: translate(0, -100%);
+	}
+	100% {
+		opacity: 1;
+		transform: translate(0, 0);
+	}
+}
+
+.ModalWindow.open {
+	animation: slideInFromTopMiddle 0.5s ease-out;
+}
+
+.wrapper {
+	display: flex;
+  flex-direction: column;
+  gap: 38px;
+  padding: 20px;
+  position: absolute;
+  top: 35%;
+  left: 17%;
+	align-items: center;
+}
+
+.affirmation__container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 14px;
+	text-align: center;
+	gap: 10px;
+	background-image: url("../../../assets/images/affirmationDay/back.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+	border-radius: 32px;
+	max-width: 368px;
+	font-size: 22px;
+	font-family: 'Playfair Display', serif;
+
+	> p {
+		font-family: 'Inter', sans-serif;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 16px;
+		color: rgba(192, 183, 255, 1)
+	}
+}
+
+.title {
+	text-align: center;
+	color: rgba(255, 255, 255, 1);
+	font-weight: 600;
+	font-size: 22px;
+	letter-spacing: -0.8px;
+	line-height: 28px;
+	max-width: 280px;
+}
+
+.button {
+	background: rgba(255, 255, 255, 0.16);
+		padding: 17px 41px 17px 41px;
+		border-radius: 16px;
+		font-weight: 600;
+		font-size: 16px;
+		align-items: center;
+		letter-spacing: -0.32px;
+		color: #FFFFFF;
+		width: 150px;
+}
