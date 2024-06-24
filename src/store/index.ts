@@ -29,6 +29,6 @@ export const store = configureStore({
         manualsGet: manualsGetReducer,
         payContent: payContentReducer,
         checkPay: checkPayReducer,
-        modals: modalsSliceReducer
+        modals: modalsSliceReducer,
     },
 });

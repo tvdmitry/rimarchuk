@@ -22,7 +22,9 @@ import { WaterTracker } from './components/WaterTracker'
 const MainPage = () => {
     const { initDataUnsafe } = useTelegram();
     const [isMobile, setIsMobile] = useState(window.innerWidth < 500);
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
+    const [isScrollable, setIsScrollable] = useState(false);
+    const [howManyScrolls, setHowManyScrolls] = useState(0);
     /* const [userTokenFetched, setUserTokenFetched] = useState(false);*/
     const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
     const userId: number = initDataUnsafe?.user?.id;
@@ -47,7 +49,6 @@ const MainPage = () => {
 
     const authUser: AuthUser = useSelector((state: AuthResponse) => state.auth);
     const allUsers: AllUsers = useSelector((state: UserResponse) => state.user);
-
     console.log(authUser, 'authUser');
     console.log(allUsers.data.length, 'allUsers.data.length');
 
@@ -61,7 +62,8 @@ const MainPage = () => {
                 console.log('fetchData', userId, userName);
                 const isIdExists = allUsers.data.some((user) => +user.user_id === +userId);
                 if (!isIdExists) {
-                    dispatch(setOpen(true));
+                    setShow(true);
+                    dispatch(setOpen(show));
                     await dispatch(addNewUser({ user_id: +userId, user_name: userName }));
                     await dispatch(authToken(Number(userId)));
                 } else {
@@ -73,7 +75,7 @@ const MainPage = () => {
         };
 
         fetchData();
-    }, [dispatch, allUsers.data, userId, userName]);
+    }, [dispatch, allUsers.data, userId, userName, show]);
 
     // useEffect(() => {
     //     const fetchAllData = async () => {
@@ -97,6 +99,25 @@ const MainPage = () => {
             fetchUser();
         }
     }, [authUser.user, dispatch]);
+    // const isShow = useSelector((state: ModalsResponse) => state.modals.firstShow);
+
+    // useEffect(() => {
+    //     const handleScrollDown = () => {
+    //         const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    //         if (scrollTop > 0) {
+    //             if (isShow) {
+    //                 setIsScrollable(true);
+    //                 dispatch(openOnboardingScrollDown({ scrollShow: isScrollable, alreadyShow: false }));
+    //                 dispatch(openOnboardingScrollDown({ scrollShow: isScrollable, alreadyShow: true }));
+    //             }
+    //         }
+    //     };
+    //     window.addEventListener('scroll', handleScrollDown);
+
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScrollDown);
+    //     };
+    // }, [isShow, dispatch, isScrollable]);
 
     return (
         <div className={css.container}>
