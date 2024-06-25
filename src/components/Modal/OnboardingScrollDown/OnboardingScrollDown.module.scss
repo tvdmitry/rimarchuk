@@ -1,0 +1,73 @@
+.ModalWindow {
+  position: fixed;
+  left: -120px;
+  top: 250px;
+
+  width: 614px;
+	height: 614px;
+	border-radius: 60%;
+  background-color: #2545ED;
+  cursor: default;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 9999;
+	overflow-y: hidden;
+}
+
+.ModalWindow.open {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+@keyframes slideInFromBottomMiddle {
+  0% {
+      opacity: 0;
+      transform: translate(0%, 100%);
+  }
+  100% {
+      opacity: 1;
+      transform: translate(0, 0);
+  }
+}
+
+.ModalWindow.open {
+  animation: slideInFromBottomMiddle 0.5s ease-out forwards;
+}
+
+.ModalWindow.open {
+	overflow-y: hidden;
+}
+
+.wrapper {
+	position: absolute;
+	top: 15%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 35px;
+	align-items: center;
+
+	> p {
+		color: rgba(255, 255, 255, 1);
+		font-weight: 600;
+		font-size: 22px;
+		letter-spacing: -0.8px;
+		line-height: 28px;
+		max-width: 280px;
+	}
+
+	> button {
+		background: rgba(255, 255, 255, 0.16);
+		padding: 17px 41px 17px 41px;
+		border-radius: 16px;
+		font-weight: 600;
+		font-size: 16px;
+		align-items: center;
+		letter-spacing: -0.32px;
+		color: #FFFFFF;
+	}
+}
