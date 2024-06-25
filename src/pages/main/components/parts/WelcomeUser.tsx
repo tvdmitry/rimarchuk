@@ -4,7 +4,7 @@ import { useTelegram } from '@/utils/hooks/useTelegram'
 import { AuthResponse, AuthUser } from '@/utils/types'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { openOnboardingQuestions, openOnboardingTasks } from '@/store/modalsSlice'
 import { ModalsResponse } from '@/utils/types/modals'
@@ -16,9 +16,8 @@ export const WelcomeUser = () => {
     const [userImg, setUserImg] = useState('');
     const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
     const authUser: AuthUser = useSelector((state: AuthResponse) => state.auth);
-    const firstOpen: boolean = useSelector((state: ModalsResponse) => state.modals.firstShow)
+    const firstOpen: boolean = useSelector((state: ModalsResponse) => state.modals.firstShow);
     const userName = initDataUnsafe?.user?.first_name;
-    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -32,25 +31,27 @@ export const WelcomeUser = () => {
         }
     }, [authUser.user]);
 
-    const handleOnLinkClick = () => {
-        if (firstOpen) {
+    const handleClickOnStatistics = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        const isAlreadyShow = localStorage.getItem('onboardingStatisticsAlreadyShow');
+        if (firstOpen && isAlreadyShow !== 'true') {
+            event.preventDefault();
             dispatch(openOnboardingTasks());
-        } else {
-            navigate('/statistics');
+            localStorage.setItem('onboardingStatisticsAlreadyShow', 'true');
         }
-    }
+    };
 
-    const handleOnButtonClick = () => {
-        if (firstOpen) {
+    const handleClickOnQuestions = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        const isAlreadyShow = localStorage.getItem('onboardingQuestionsAlreadyShow');
+        if (firstOpen && isAlreadyShow !== 'true') {
+            event.preventDefault();
             dispatch(openOnboardingQuestions());
-        } else {
-            navigate('/questions');
+            localStorage.setItem('onboardingQuestionsAlreadyShow', 'true');
         }
-    }
+    };
 
     return (
         <div className={css.welcomeUser}>
-            <div onClick={handleOnLinkClick}>
+            <Link to="/statistics" onClick={handleClickOnStatistics}>
                 <div className={css.user}>
                     <div className={css.greetings}>
                         {userImg === '' ? (
@@ -72,9 +73,11 @@ export const WelcomeUser = () => {
                         <ArrowIcon />
                     </button>
                 </div>
-            </div>
-            <button type="button" className={css.questions} onClick={handleOnButtonClick}>
-                <QuestionsIcon />
+            </Link>
+            <button type="button" className={css.questions}>
+                <Link to="/questions" onClick={handleClickOnQuestions}>
+                    <QuestionsIcon />
+                </Link>
             </button>
         </div>
     );

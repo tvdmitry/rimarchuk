@@ -26,11 +26,12 @@ export const AffirmationInfo = () => {
     const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
     const allAffirmation: AllAffirmations = useSelector((state: AffirmationResponse) => state.affirmation);
     const currentUser: UserGet = useSelector((state: UserGetResponse) => state.currentUser);
-    const firstOpen: boolean = useSelector((state: ModalsResponse) => state.modals.firstShow)
+    const firstOpen: boolean = useSelector((state: ModalsResponse) => state.modals.firstShow);
+
     useEffect(() => {
         dispatch(getAffirmationAll());
     }, [dispatch]);
-    
+
     useEffect(() => {
         if (allAffirmation.data && currentUser.data?.affirmation_id) {
             setAffirmation(getEntryAffirmation(allAffirmation, currentUser.data.affirmation_id));
@@ -39,13 +40,17 @@ export const AffirmationInfo = () => {
         }
     }, [allAffirmation, currentUser.data?.affirmation_id]);
 
-    useInterval(async() => {
+    useInterval(async () => {
         await dispatch(getRandomAffirmation());
     }, 12 * 60 * 60 * 1000);
 
-    if (firstOpen) {
-        dispatch(openOnboardingAffirmation(affirmation));
-    }
+    useEffect(() => {
+        const isAlreadyShow = localStorage.getItem('onboardingAffirmationAlreadyShow');
+        if (firstOpen && isAlreadyShow !== 'true') {
+            dispatch(openOnboardingAffirmation(affirmation));
+            localStorage.setItem('onboardingAffirmationAlreadyShow', 'true');
+        }
+    }, [firstOpen, dispatch, affirmation]);
 
     return (
         <div className={css.affirmation}>

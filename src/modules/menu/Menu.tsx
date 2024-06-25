@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import cs from 'classnames'
 
@@ -14,35 +14,34 @@ import css from './Menu.module.scss'
 export const Menu = () => {
     const isShow: boolean = useSelector((state: ModalsResponse) => state.modals.firstShow);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const isActive = (path: string) => {
         return window.location.pathname === path;
     };
 
     const handleOnManualClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-        if (isShow) {
+        const isAlreadyShow = localStorage.getItem('onboardingManualAlreadyShow');
+        if (isShow && isAlreadyShow !== 'true') {
             event.preventDefault();
             dispatch(openOnboardingManual());
-        } else {
-            navigate('/manuals');
+            localStorage.setItem('onboardingManualAlreadyShow', 'true');
         }
     };
 
     const handleOnHomeClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-        if (isShow) {
+        const isAlreadyShow = localStorage.getItem('onboardingHomeAlreadyShow');
+        if (isShow && isAlreadyShow !== 'true') {
             event.preventDefault();
             dispatch(openOnboardingHome());
-        } else {
-            navigate('/');
+            localStorage.setItem('onboardingHomeAlreadyShow', 'true');
         }
     };
 
     const handleOnCourseClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-        if (isShow) {
+        const isAlreadyShow = localStorage.getItem('onboardingCourseAlreadyShow');
+        if (isShow && isAlreadyShow !== 'true') {
             event.preventDefault();
             dispatch(openOnboardingCourse());
-        } else {
-            navigate('/courses');
+            localStorage.setItem('onboardingCourseAlreadyShow', 'true');
         }
     };
 
