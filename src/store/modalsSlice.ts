@@ -4,6 +4,8 @@ const initialState = {
     isOpen: false,
     modalType: '',
     firstShow: false,
+    currentStep: 0, // Добавлено состояние для текущего шага
+    isLoading: false, // Добавлено состояние для отображения индикатора загрузки
     data: {
         affirmation: '',
         scrollShow: false,
@@ -23,50 +25,35 @@ export const modalsSlice = createSlice({
             state.isOpen = false;
             state.data.scrollShow = false;
         },
-        openOnboardingTasks: (state) => {
-            state.modalType = 'ONBOARDINGTASKS';
+        openModal: (state, action) => {
+            state.modalType = action.payload;
             state.isOpen = true;
+            state.isLoading = true;
         },
-        openOnboardingQuestions: (state) => {
-            state.modalType = 'ONBOARDINGQUESTIONS';
-            state.isOpen = true;
+        nextStep: (state) => {
+            state.currentStep += 1;
+            const modalSteps = [
+                'ONBOARDINGTASKS',
+                'ONBOARDINGQUESTIONS',
+                'ONBOARDINGAFFIRMATION',
+                'ONBOARDINGMANUAL',
+                'ONBOARDINGHOME',
+                'ONBOARDINGCOURSE',
+                'ONBOARDINGSCROLLDOWN',
+            ];
+            if (state.currentStep < modalSteps.length) {
+                state.modalType = modalSteps[state.currentStep];
+            } else {
+                state.isOpen = false;
+            }
         },
-        openOnboardingAffirmation: (state, action) => {
-            state.modalType = 'ONBOARDINGAFFIRMATION';
-            state.isOpen = true;
-            state.data.affirmation = action.payload;
-        },
-        openOnboardingManual: (state) => {
-            state.modalType = 'ONBOARDINGMANUAL';
-            state.isOpen = true;
-        },
-        openOnboardingHome: (state) => {
-            state.modalType = 'ONBOARDINGHOME';
-            state.isOpen = true;
-        },
-        openOnboardingCourse: (state) => {
-            state.modalType = 'ONBOARDINGCOURSE';
-            state.isOpen = true;
-        },
-        openOnboardingScrollDown: (state, action) => {
-            state.modalType = 'ONBOARDINGSCROLLDOWN';
-            state.isOpen = true;
-            state.data.scrollShow = action.payload.scrollShow;
-            state.data.alreadyShow = action.payload.alreadyShow;
+        setData: (state, action) => {
+            state.data = { ...state.data, ...action.payload };
+            state.isLoading = false;
         },
     },
 });
 
-export const {
-    setOpen,
-    closeModal,
-    openOnboardingTasks,
-    openOnboardingQuestions,
-    openOnboardingAffirmation,
-    openOnboardingManual,
-    openOnboardingHome,
-    openOnboardingCourse,
-    openOnboardingScrollDown,
-} = modalsSlice.actions;
+export const { setOpen, closeModal, openModal, nextStep, setData } = modalsSlice.actions;
 
 export default modalsSlice.reducer;

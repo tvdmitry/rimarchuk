@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import css from './OnboardingCourse.module.scss'
-export const OnboardingCourse = () => {
+export const OnboardingCourse = ({ next }: { next: () => void }) => {
 		const modalRef = useRef(null);
 		useEffect(() => {
 			modalRef.current?.classList.add(css.open);
@@ -17,7 +17,7 @@ export const OnboardingCourse = () => {
                 <p>
                     Для тебя есть <br /> бесплатный курс
                 </p>
-                <button type="button" className={css.button} onClick={close}>
+                <button type="button" className={css.button} onClick={next}>
                     Супер
                 </button>
                 <div className={css.mainIcon}>

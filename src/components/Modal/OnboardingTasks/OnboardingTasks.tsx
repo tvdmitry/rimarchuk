@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import ArrowIcon from '@/assets/images/arrowIcon/arrow.svg'
-import { closeModal } from '@/store/modalsSlice'
 import { useTelegram } from '@/utils/hooks/useTelegram'
 import { AuthResponse, AuthUser } from '@/utils/types'
 import css from './OnboardingTasks.module.scss'
 
-export const OnboardingTasks = () => {
+export const OnboardingTasks = ({ next }: { next: () => void }) => {
     const { initDataUnsafe } = useTelegram();
     const authUser: AuthUser = useSelector((state: AuthResponse) => state.auth);
     const dispatch = useDispatch();
@@ -16,7 +15,6 @@ export const OnboardingTasks = () => {
     useEffect(() => {
         modalRef.current?.classList.add(css.open);
     }, []);
-    const close = () => dispatch(closeModal());
     const userName = initDataUnsafe?.user?.first_name;
     const userImg = initDataUnsafe?.user?.photo_url
     return (
@@ -50,7 +48,7 @@ export const OnboardingTasks = () => {
                     <p>Выполняй задания и получай индивидуальные подарки</p>
                 </div>
                 <div className={css.tasksButton}>
-                    <button type="button" onClick={close}>
+                    <button type="button" onClick={next}>
                         Чудесно
                     </button>
                 </div>

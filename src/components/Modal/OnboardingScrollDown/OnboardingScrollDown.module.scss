@@ -69,5 +69,10 @@
 		align-items: center;
 		letter-spacing: -0.32px;
 		color: #FFFFFF;
+		cursor: pointer;
+		&:active {
+      background: rgba(255, 255, 255, 0.48);
+      transition: background-color 0.5s;
+    }
 	}
 }

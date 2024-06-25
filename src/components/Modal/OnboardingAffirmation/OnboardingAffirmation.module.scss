@@ -91,4 +91,9 @@
 		letter-spacing: -0.32px;
 		color: #FFFFFF;
 		width: 150px;
+		cursor: pointer;
+		&:active {
+      background: rgba(255, 255, 255, 0.48);
+      transition: background-color 0.5s;
+    }
 }

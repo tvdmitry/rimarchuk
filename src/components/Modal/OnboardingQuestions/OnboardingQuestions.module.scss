@@ -42,7 +42,7 @@
   gap: 46px;
   padding: 20px;
   position: absolute;
-  top: 38%;
+  top: 50%;
   left: 22%;
 }
 
@@ -65,14 +65,28 @@
 		align-items: center;
 		letter-spacing: -0.32px;
 		color: #FFFFFF;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    cursor: pointer;
+    &:active {
+      background: rgba(255, 255, 255, 0.48);
+      transition: background-color 0.5s;
+    }
+
 }
 
 .icon {
+  position: absolute;
+  bottom: 103%;;
+  right: 5%;
 	width: 46px;
 	height: 46px;
 	background-color: #150A48;
 	border-radius: 50%;
 	> svg {
-		margin: 12px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 	}
 }

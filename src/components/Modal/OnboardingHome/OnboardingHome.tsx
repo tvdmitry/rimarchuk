@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import css from './OnboardingHome.module.scss'
-export const OnboardingHome = () => {
+export const OnboardingHome = ({ next }: { next: () => void }) => {
     const modalRef = useRef(null);
     useEffect(() => {
         modalRef.current?.classList.add(css.open);
@@ -15,7 +15,7 @@ export const OnboardingHome = () => {
         <div className={css.ModalWindow} ref={modalRef}>
             <div className={css.wrapper}>
                 <p>Главное меню</p>
-                <button type="button" onClick={close}>
+                <button type="button" onClick={next}>
                     Хорошо
                 </button>
                 <div className={css.mainIcon}>

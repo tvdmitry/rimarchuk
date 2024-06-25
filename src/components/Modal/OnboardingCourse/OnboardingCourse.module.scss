@@ -62,13 +62,18 @@
 		align-items: center;
 		letter-spacing: -0.32px;
 		color: #FFFFFF;
+		cursor: pointer;
+		&:active {
+      background: rgba(255, 255, 255, 0.48);
+      transition: background-color 0.5s;
+    }
 	}
 }
 
 .mainIcon {
 	position: absolute;
 	top: 120%;
-	left: 46%;
+	left: 35%;
 	background: #241f3c;
 	width: 48px;
 	height: 48px;
