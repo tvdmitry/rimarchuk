@@ -16,7 +16,6 @@ const portal = document.getElementById('onboard');
 export const Modal = () => {
     const dispatch = useDispatch();
     const modals: Modals = useSelector((state: ModalsResponse) => state.modals);
-    const alreadyShow = useSelector((state: ModalsResponse) => state.modals.data.alreadyShow);
     const closeCallBack = useCallback(() => {
         dispatch(closeModal());
     }, []);
@@ -28,7 +27,7 @@ export const Modal = () => {
             {modals.modalType === 'ONBOARDINGMANUAL' && <OnboardingManual />}
             {modals.modalType === 'ONBOARDINGHOME' && <OnboardingHome />}
             {modals.modalType === 'ONBOARDINGCOURSE' && <OnboardingCourse />}
-            {modals.modalType === 'ONBOARDINGSCROLLDOWN' && !alreadyShow ? <OnboardingScrollDown /> : null}
+            {modals.modalType === 'ONBOARDINGSCROLLDOWN' && <OnboardingScrollDown />}
         </ModalWindow>,
         portal
     );
