@@ -9,7 +9,7 @@ import { getEntryAffirmation } from '@/utils/helpers/affirmation/getEntryAffirma
 import { UserGet, UserGetResponse } from '@/utils/types'
 import { AffirmationResponse, AllAffirmations } from '@/utils/types/affirmation'
 
-import { openOnboardingAffirmation } from '@/store/modalsSlice'
+import { setData } from '@/store/modalsSlice'
 import { ModalsResponse } from '@/utils/types/modals'
 import css from './AffirmationInfo.module.scss'
 
@@ -21,7 +21,7 @@ const useInterval = (callback: () => void, delay: number) => {
 };
 
 export const AffirmationInfo = () => {
-    const [affirmation, setAffirmation] = useState<string>('');
+    const [affirmation, setAffirmation] = useState('');
 
     const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
     const allAffirmation: AllAffirmations = useSelector((state: AffirmationResponse) => state.affirmation);
@@ -34,23 +34,18 @@ export const AffirmationInfo = () => {
 
     useEffect(() => {
         if (allAffirmation.data && currentUser.data?.affirmation_id) {
-            setAffirmation(getEntryAffirmation(allAffirmation, currentUser.data.affirmation_id));
+            const affirmation = getEntryAffirmation(allAffirmation, currentUser.data.affirmation_id);
+            setAffirmation(affirmation);
+            dispatch(setData({ affirmation: affirmation }));
         } else {
             setAffirmation(allAffirmation?.data[0]?.affirmation);
+            dispatch(setData({ affirmation: allAffirmation?.data[0]?.affirmation }));
         }
-    }, [allAffirmation, currentUser.data?.affirmation_id]);
+    }, [allAffirmation, currentUser.data?.affirmation_id, dispatch]);
 
     useInterval(async () => {
         await dispatch(getRandomAffirmation());
     }, 12 * 60 * 60 * 1000);
-
-    useEffect(() => {
-        const isAlreadyShow = localStorage.getItem('onboardingAffirmationAlreadyShow');
-        if (firstOpen && isAlreadyShow !== 'true') {
-            dispatch(openOnboardingAffirmation(affirmation));
-            localStorage.setItem('onboardingAffirmationAlreadyShow', 'true');
-        }
-    }, [firstOpen, dispatch, affirmation]);
 
     return (
         <div className={css.affirmation}>

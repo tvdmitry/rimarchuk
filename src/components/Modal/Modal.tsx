@@ -1,4 +1,4 @@
-import { closeModal } from '@/store/modalsSlice'
+import { closeModal, nextStep } from '@/store/modalsSlice'
 import { Modals, ModalsResponse } from '@/utils/types/modals'
 import { useCallback } from 'react'
 import ReactDOM from 'react-dom'
@@ -16,18 +16,24 @@ const portal = document.getElementById('onboard');
 export const Modal = () => {
     const dispatch = useDispatch();
     const modals: Modals = useSelector((state: ModalsResponse) => state.modals);
+    
     const closeCallBack = useCallback(() => {
         dispatch(closeModal());
-    }, []);
+    }, [dispatch]);
+
+    const nextStepCallback = useCallback(() => {
+        dispatch(nextStep());
+    }, [dispatch]);
+
     return ReactDOM.createPortal(
         <ModalWindow close={closeCallBack} isOpen={modals.isOpen}>
-            {modals.modalType === 'ONBOARDINGTASKS' && <OnboardingTasks />}
-            {modals.modalType === 'ONBOARDINGQUESTIONS' && <OnboardingQuestions />}
-            {modals.modalType === 'ONBOARDINGAFFIRMATION' && <OnboardingAffirmation />}
-            {modals.modalType === 'ONBOARDINGMANUAL' && <OnboardingManual />}
-            {modals.modalType === 'ONBOARDINGHOME' && <OnboardingHome />}
-            {modals.modalType === 'ONBOARDINGCOURSE' && <OnboardingCourse />}
-            {modals.modalType === 'ONBOARDINGSCROLLDOWN' && <OnboardingScrollDown />}
+            {modals.modalType === 'ONBOARDINGTASKS' && <OnboardingTasks next={nextStepCallback} />}
+            {modals.modalType === 'ONBOARDINGQUESTIONS' && <OnboardingQuestions next={nextStepCallback} />}
+            {modals.modalType === 'ONBOARDINGAFFIRMATION' && <OnboardingAffirmation next={nextStepCallback} />}
+            {modals.modalType === 'ONBOARDINGMANUAL' && <OnboardingManual next={nextStepCallback} />}
+            {modals.modalType === 'ONBOARDINGHOME' && <OnboardingHome next={nextStepCallback} />}
+            {modals.modalType === 'ONBOARDINGCOURSE' && <OnboardingCourse next={nextStepCallback} />}
+            {modals.modalType === 'ONBOARDINGSCROLLDOWN' && <OnboardingScrollDown next={nextStepCallback} />}
         </ModalWindow>,
         portal
     );

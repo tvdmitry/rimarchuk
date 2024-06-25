@@ -9,7 +9,7 @@ import { VideoBlock } from '@/modules/videoBlock/VideoBlock'
 import { getAffirmationAll } from '@/store/affirmationSlice'
 import { authToken } from '@/store/authSlice'
 import { getUser } from '@/store/currentUserSlice'
-import { openOnboardingScrollDown, setOpen } from '@/store/modalsSlice'
+import { openModal, setOpen } from '@/store/modalsSlice'
 import { addNewUser, getUsersAll } from '@/store/userSlice'
 import { getVideosAll } from '@/store/videosSlice'
 import { useTelegram } from '@/utils/hooks/useTelegram'
@@ -103,22 +103,12 @@ const MainPage = () => {
     const isShow = useSelector((state: ModalsResponse) => state.modals.firstShow);
 
     useEffect(() => {
-        const handleScrollDown = () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-            if (scrollTop > 0) {
-                const isAlreadyShow = localStorage.getItem('scrollOnboardingAlreadyShow');
-                if (isShow && isAlreadyShow !== 'true') {
-                    setIsScrollable(true);
-                    dispatch(openOnboardingScrollDown({ scrollShow: isScrollable, alreadyShow: false }));
-                    localStorage.setItem('scrollOnboardingAlreadyShow', 'true');
-                }
-            }
-        };
-        window.addEventListener('scroll', handleScrollDown);
-
-        return () => {
-            window.removeEventListener('scroll', handleScrollDown);
-        };
+        const isAlreadyShowModals = localStorage.getItem('SHOWALLMODALS');
+        if (isShow && isAlreadyShowModals !== 'true') {
+            setIsScrollable(true);
+            dispatch(openModal('ONBOARDINGTASKS'));
+            localStorage.setItem('SHOWALLMODALS', 'true');
+        }
     }, [isShow, dispatch, isScrollable]);
 
     return (

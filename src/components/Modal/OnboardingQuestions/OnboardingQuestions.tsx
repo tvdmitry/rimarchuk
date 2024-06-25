@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import css from './OnboardingQuestions.module.scss'
-export const OnboardingQuestions = () => {
+export const OnboardingQuestions = ({ next }: { next: () => void }) => {
     const dispatch = useDispatch();
     const close = () => dispatch(closeModal());
     const modalRef = useRef<HTMLDivElement>(null);
@@ -23,7 +23,7 @@ export const OnboardingQuestions = () => {
                         на вопросы
                     </p>
                 </div>
-                <button type="button" className={css.button} onClick={close}>
+                <button type="button" className={css.button} onClick={next}>
                     Хорошо
                 </button>
             </div>

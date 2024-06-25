@@ -3,7 +3,7 @@ import { ModalsResponse } from '@/utils/types/modals'
 import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import css from './OnboardingAffirmation.module.scss'
-export const OnboardingAffirmation = () => {
+export const OnboardingAffirmation = ({ next }: { next: () => void }) => {
     const dispatch = useDispatch();
     const close = () => dispatch(closeModal());
     const affirmation: string = useSelector((state: ModalsResponse) => state.modals.data.affirmation);
@@ -23,7 +23,7 @@ export const OnboardingAffirmation = () => {
                         Заходи ежедневно <br /> и получай пользу дня
                     </p>
                 </div>
-                <button type="button" className={css.button} onClick={close}>
+                <button type="button" className={css.button} onClick={next}>
                     Кайф
                 </button>
             </div>
