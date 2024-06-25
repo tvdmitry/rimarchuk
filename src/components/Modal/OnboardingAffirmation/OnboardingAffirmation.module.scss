@@ -1,55 +1,52 @@
 .ModalWindow {
-	position: absolute;
-	left: -120px;
-	top: -200px;
-	width: 614px;
-	height: 614px;
-	border-radius: 60%;
-	background-color: #2545ED;
-	cursor: default;
-	transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	z-index: 9999;
-	opacity: 0; /* Начальное значение для плавного появления */
-	transform: translate(0, -100%); /* Начальное значение для анимации */
+  position: fixed;
+	top: 0;
+	left: -23.5%;
+	opacity: 0;
+  width: 550px; /* Диаметр круга */
+  height: 400px; /* Диаметр круга */
+  background-color: #2545ED;
+  border-bottom-left-radius: 100%; /* Закругленный внешний край */
+	border-bottom-right-radius: 100%;
+	transform: translateX(-50%); /* Центрируем по горизонтали */
+  overflow: hidden; /* Скрыть лишнее */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 9999;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
 .ModalWindow.open {
-	opacity: 1;
-	transform: translate(0, 0);
-	animation: slideInFromTopMiddle 0.5s ease-out;
+  opacity: 1;
+  transform: translate(0, 0); /* Анимация к конечному состоянию */
+  animation: slideInFromTopMiddleToDown 0.5s ease-out;
 }
 
-@keyframes slideInFromTopMiddle {
-	0% {
-			opacity: 0;
-			transform: translate(0, -100%);
-	}
-	100% {
-			opacity: 1;
-			transform: translate(0, 0);
-	}
+@keyframes slideInFromTopMiddleToDown {
+  0% {
+		opacity: 0;
+		transform: translate(0, -100%);
+  }
+  100% {
+		opacity: 1;
+		transform: translate(0, 0);
+  }
 }
 
 .wrapper {
-	display: flex;
-	flex-direction: column;
-	gap: 38px;
-	padding: 20px;
-	margin-top: 220px;
-	top: 35%;
-	left: 17.8%;
-	align-items: center;
-	container-name: rangeContainer;
-	container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+  padding: 20px;
+  align-items: center;
 }
 
-@container rangeContainer (min-width: 768px) {
-	.ModalWindow {
-			height: 694px;
-	}
+@media (min-width: 558px) {
+  .ModalWindow {
+    width: 550px; /* Увеличенная ширина для больших экранов */
+    height: 500px; /* Увеличенная высота для больших экранов */
+  }
 }
 
 .affirmation__container {
