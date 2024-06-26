@@ -1,22 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
-import cs from 'classnames';
+import cs from 'classnames'
 
-import CourseIcon from '@/assets/images/main/course.svg';
-import HomeIcon from '@/assets/images/main/home.svg';
-import ManualIcon from '@/assets/images/main/manual.svg';
+import CourseIcon from '@/assets/images/main/course.svg'
+import HomeIcon from '@/assets/images/main/home.svg'
+import ManualIcon from '@/assets/images/main/manual.svg'
 
-import css from './Menu.module.scss';
+import { ModalsResponse } from '@/utils/types/modals'
+import { useDispatch, useSelector } from 'react-redux'
+import css from './Menu.module.scss'
 
 export const Menu = () => {
+    const isShow: boolean = useSelector((state: ModalsResponse) => state.modals.firstShow);
+    const dispatch = useDispatch();
     const isActive = (path: string) => {
         return window.location.pathname === path;
     };
 
     return (
         <div className={css.mainMenu}>
-            <Link to="/manuals" className={cs(css.mainLink, isActive('/manuals') && css.activeLink)}>
+            <Link
+                to="/manuals"
+                className={cs(css.mainLink, isActive('/manuals') && css.activeLink)}
+            >
                 <div className={css.mainIcon}>
                     <ManualIcon />
                 </div>
@@ -26,7 +32,10 @@ export const Menu = () => {
                     <HomeIcon />
                 </div>
             </Link>
-            <Link to="/courses" className={cs(css.mainLink, isActive('/courses') && css.activeLink)}>
+            <Link
+                to="/courses"
+                className={cs(css.mainLink, isActive('/courses') && css.activeLink)}
+            >
                 <div className={css.mainIcon}>
                     <CourseIcon />
                 </div>

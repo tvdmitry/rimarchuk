@@ -1,0 +1,90 @@
+.ModalWindow {
+	position: fixed;
+  left: -210px;
+  top: 250px;
+
+  width: 614px;
+	height: 614px;
+	border-radius: 60%;
+  background-color: #2545ED;
+  cursor: default;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 9999;
+}
+
+.ModalWindow.open {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+@keyframes slideInFromBottomLeft {
+  0% {
+      opacity: 0;
+      transform: translate(-100%, 100%);
+  }
+  100% {
+      opacity: 1;
+      transform: translate(0, 0);
+  }
+}
+
+.ModalWindow.open {
+  animation: slideInFromBottomLeft 0.5s ease-out forwards;
+}
+
+.wrapper {
+	position: absolute;
+	top: 15%;
+	left: 36%;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	align-items: start;
+
+	> button {
+		background: rgba(255, 255, 255, 0.16);
+		padding: 17px 41px 17px 41px;
+		border-radius: 16px;
+		font-weight: 600;
+		font-size: 16px;
+		align-items: center;
+		letter-spacing: -0.32px;
+		color: #FFFFFF;
+		cursor: pointer;
+		&:active {
+      background: rgba(255, 255, 255, 0.48);
+      transition: background-color 0.5s;
+    }
+	}
+
+	> p {
+		color: rgba(255, 255, 255, 1);
+		font-weight: 600;
+		font-size: 22px;
+		letter-spacing: -0.8px;
+		line-height: 28px;
+		max-width: 280px;
+	}
+}
+
+.mainIcon {
+	position: absolute;
+	top: 30%;
+	left: 15%;
+	background: linear-gradient(to right top, #555168, #302a48,);
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	z-index: 9999;
+	> a svg {
+		position: relative;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}

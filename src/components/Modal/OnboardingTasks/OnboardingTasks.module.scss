@@ -1,0 +1,158 @@
+.ModalWindow {
+  position: absolute;
+  left: -270px;
+  top: -200px;
+
+  width: 634px;
+	height: 594px;
+	border-radius: 70%;
+  background-color: #2545ED;
+  cursor: default;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 9999;
+}
+
+.ModalWindow.open {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+@keyframes slideInFromTopLeft {
+  0% {
+      opacity: 0;
+      transform: translate(-100%, -100%);
+  }
+  100% {
+      opacity: 1;
+      transform: translate(0, 0);
+  }
+}
+
+.ModalWindow.open {
+  animation: slideInFromTopLeft 0.5s ease-out forwards;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 20px;
+  position: absolute;
+  top: 30%;
+  left: 40%;
+}
+
+.user__container {
+	display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 9999;
+  margin-bottom: 50px;
+  margin-top: 15px;
+
+	.user {
+    display: flex;
+    max-width: 145px;
+		align-items: center;
+    gap: 5px;
+		background-color: #150A48;
+		border-radius: 30px;
+		padding: 10px;
+		max-height: 40px;
+
+    .greetings {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 8px;
+
+      .userAvatar {
+        display: block;
+        width: 32px;
+        border-radius: 50%;
+        height: 32px;
+      }
+
+      .userInfo {
+        display: flex;
+        flex-direction: column;
+
+        .helloUser {
+          color: #8A8A8E;
+          font-size: 11px;
+          letter-spacing: 0.066px;
+        }
+
+        .username {
+          color: #FFF;
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: -0.154px;
+        }
+      }
+
+      .loader {
+				margin-top: 5px;
+        width: 25px;
+        height: 25px;
+        border: 2px solid #FFF;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+      }
+
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+    
+    .arrowIcon {
+      background: transparent;
+      cursor: pointer;
+    }
+  }
+  
+  .questions {
+    background: transparent;
+    cursor: pointer;
+  }
+}
+
+.title {
+	color: #FFFFFF;
+	font-weight: 600;
+	font-size: 22px;
+	letter-spacing: -0.8px;
+	line-height: 28px;
+	max-width: 280px;
+	margin-left: 10px;
+	margin-bottom: 24px;
+}
+
+.tasksButton {
+	margin-left: 10px;
+	button {
+		background: rgba(255, 255, 255, 0.16);
+		padding: 17px 41px 17px 41px;
+		border-radius: 16px;
+		font-weight: 600;
+		font-size: 16px;
+		align-items: center;
+		letter-spacing: -0.32px;
+		color: #FFFFFF;
+    cursor: pointer;
+    &:active {
+      background: rgba(255, 255, 255, 0.48);
+      transition: background-color 0.5s;
+    }
+	}
+}
