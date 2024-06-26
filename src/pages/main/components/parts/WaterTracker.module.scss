@@ -2,26 +2,24 @@
   display: flex;
   flex-direction: column;
   position: relative;
-
+  gap: 10px;
   &::after {
     content: "";
     background-color: #122276;
     position: absolute;
-    bottom: -100%;
+    bottom: -130%;
     left: -24px;
     width: calc(100% + 48px);
     height: 100%;
-    z-index: -1;
     transform: translateY(30%);
   }
 
   .background {
     position: absolute;
-    z-index: -1;
-    top: 0;
+    top: -50%;
     left: 0;
     right: 0;
-    bottom: -80px;
+    bottom: 0;
     height: 100%;
 
     svg {
@@ -139,7 +137,6 @@
 
   .addGlass {
     cursor: pointer;
-    opacity: 0.4;
     position: fixed;
     bottom: 24px;
     left: 50%;
@@ -149,7 +146,7 @@
     padding: 17px 23px;
     border-radius: 20px;
     z-index: 22;
-    background: #FFF;
+    background: #FFFFFF;
     display: flex;
     gap: 12px;
     align-items: flex-start;
@@ -276,7 +273,8 @@
 
 .waterTrackerProgress {
   position: absolute;
-  bottom: -85%;
+  bottom: 0%;
+  max-height: 425px;
   height: 100%;
   left: 0;
   display: flex;
