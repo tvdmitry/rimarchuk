@@ -2,183 +2,164 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  gap: 10px;
+}
 
-  &::after {
-    content: "";
-    background-color: #122276;
-    position: absolute;
-    bottom: -100%;
-    left: -24px;
-    width: calc(100% + 48px);
-    height: 100%;
-    z-index: -1;
-    transform: translateY(30%);
-  }
+.background {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
 
-  .background {
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: -80px;
-    height: 100%;
+.background svg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleY(2.8) scaleX(2);
+  transform-origin: bottom;
+  box-sizing: border-box;
+  display: block;
+  pointer-events: none;
+}
 
-    svg {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      transform: scaleY(2.8) scaleX(2);
-      transform-origin: bottom;
-      box-sizing: border-box;
-      display: block;
-      pointer-events: none;
+.waterTracker {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 80px;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 2;
+}
 
-      path {
-        //fill: #12237A;
-        //stroke-width: 1px;
-        //stroke: rgba(255, 255, 255, 0.36);
-      }
-    }
-  }
+.range {
+  display: grid;
+  align-items: center;
+  padding: 0 24px 125px;
+  grid-template-columns: 1fr 40px;
+  z-index: 3;
+}
 
-  .waterTracker {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 80px;
-    align-items: center;
-    padding: 0 16px;
-  }
+.cupIcon {
+  display: flex;
+  position: relative;
+}
 
-  .range {
-    display: grid;
-    align-items: center;
-    padding: 0 24px 125px;
-    grid-template-columns: 1fr 40px;
+.field {
+  position: relative;
+  transform: rotate(-90deg);
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  justify-items: center;
+  gap: 10px;
+}
 
-    .cupIcon {
-      display: flex;
-      position: relative;
-      z-index: 9999;
-    }
+.controlsWater {
+  transform: rotate(90deg);
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+}
 
-    .field {
-      position: relative;
-      transform: rotate(-90deg);
-      align-items: center;
-      justify-content: center;
-      /* height: 100%; */
-      display: grid;
-      grid-template-columns: 40px 1fr 40px;
-      justify-items: center;
-      gap: 10px;
+.sliderInput {
+  -webkit-appearance: none;
+  height: 6px;
+  min-width: 262px;
+  display: inline-flex;
+  border-radius: 100px;
+  outline: none;
+  border: none;
+  z-index: 2;
+  background: #1A1741;
+}
 
-      .controlsWater {
-        transform: rotate(90deg);
-        cursor: pointer;
-        position: relative;
-        z-index: 999999999999999999;
-      }
+.sliderValue {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  top: -80px;
+  transform: translate(80%) rotate(90deg);
+}
 
-      .sliderInput {
-        -webkit-appearance: none;
-        height: 6px;
-        min-width: 262px;
-        display: inline-flex;
-        border-radius: 100px;
-        outline: none;
-        border: none;
-        z-index: 2222;
-        background: #1A1741;
-      }
+.sliderNumber {
+  color: #C2C5F3;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 45px;
+  text-align: center;
+}
 
-      .sliderValue {
-        position: absolute;
-        width: 45px;
-        height: 45px;
-        top: -80px;
-        transform: translate(80%) rotate(90deg);
+.rangeWithScale {
+  display: flex;
+  align-items: center;
+}
 
-        .sliderNumber {
-          color: #C2C5F3;
-          font-size: 28px;
-          font-weight: 700;
-          letter-spacing: -1px;
-          line-height: 45px;
-          text-align: center;
-        }
-      }
+.scaleValues {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  position: absolute;
+  left: 8px;
+  transform: translateX(-50%) rotate(90deg);
+  bottom: -71px;
+}
 
-      .rangeWithScale {
-        display: flex;
-        align-items: center;
-      }
+.mark {
+  display: inline-flex;
+  width: 12px;
+  height: 2px;
+  margin-bottom: 26.75px;
+  border-radius: 100px;
+  background: rgba(194, 198, 243, 0.35);
+}
 
-      .scaleValues {
-        display: flex;
-        flex-direction: column-reverse;
-        align-items: flex-end;
-        position: absolute;
-        left: 8px;
-        transform: translateX(-50%) rotate(90deg);
-        bottom: -71px;
+.addGlass {
+  cursor: pointer;
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 230px;
+  height: 56px;
+  padding: 17px 23px;
+  border-radius: 20px;
+  z-index: 4;
+  background: #FFFFFF;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: center;
+}
 
-        .mark {
-          display: inline-flex;
-          width: 12px;
-          height: 2px;
-          margin-bottom: 26.75px;
-          border-radius: 100px;
-          background: rgba(194, 198, 243, 0.35);
-        }
-      }
-    }
-  }
+.addGlassIcon {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  fill: #0B0526 !important;
+}
 
-  .addGlass {
-    cursor: pointer;
-    opacity: 0.4;
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 230px;
-    height: 56px;
-    padding: 17px 23px;
-    border-radius: 20px;
-    z-index: 22;
-    background: #FFF;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    justify-content: center;
-
-    .addGlassIcon {
-      display: inline-flex;
-      width: 24px;
-      height: 24px;
-      fill: #0B0526 !important;
-    }
-
-    .addGlassText {
-      display: inline-flex;
-      white-space: nowrap;
-      color: #0B0526;
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: -0.32px;
-    }
-  }
+.addGlassText {
+  display: inline-flex;
+  white-space: nowrap;
+  color: #0B0526;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
 }
 
 .rangeContainer {
   position: relative;
-  z-index: 999999999999;
+  z-index: 2;
   display: flex;
   align-items: center;
-
 }
 
 .rangeInput {
@@ -188,7 +169,7 @@
   border-radius: 100px;
   outline: none;
   border: none;
-  z-index: 2222;
+  z-index: 2;
   background: #1A1741;
   margin: 18px 0;
 }
@@ -200,7 +181,6 @@
 .rangeInput + label {
   position: absolute;
   top: -48px;
-  left: 50%;
   color: #C2C5F3;
   font-size: 28px;
   font-weight: 700;
@@ -210,6 +190,7 @@
   padding: 5px 0;
   text-align: center;
   border-radius: 4px;
+  z-index: 3;
 }
 
 .rangeInput::-webkit-slider-runnable-track {
@@ -228,11 +209,10 @@
   border-radius: 50%;
   position: relative;
   margin-top: -7px;
-  z-index: 3;
+  z-index: 4;
 }
 
 .rangeInput::-moz-range-track {
-  -webkit-appearance: none;
   background: #1D183B;
   border-radius: 4px;
   width: 100%;
@@ -241,7 +221,6 @@
 }
 
 .rangeInput::-moz-range-thumb {
-  -webkit-appearance: none;
   height: 24px;
   width: 24px;
   background: white;
@@ -258,7 +237,6 @@
 }
 
 .rangeInput::-ms-thumb {
-  -webkit-appearance: none;
   height: 24px;
   width: 24px;
   background: #1D183B;
@@ -276,11 +254,12 @@
 
 .waterTrackerProgress {
   position: absolute;
-  bottom: -85%;
   height: 100%;
-  left: 0;
+  transform: translateY(100%);
   display: flex;
   width: 100%;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .ml {
@@ -295,44 +274,38 @@
 }
 
 @media (max-width: 530px) {
-  .waterTrackerWrapper {
-    .background {
-      svg {
-        transform: scaleY(2.8) scaleX(2);
-      }
-    }
+  .waterTrackerWrapper .background svg {
+    transform: scaleY(2.8) scaleX(2);
   }
 }
 
 @media (max-width: 500px) {
-  .waterTrackerWrapper {
-    .background {
-      svg {
-        transform: scaleY(6.5) scaleX(6.5);
-        bottom: -900px;
-      }
-    }
+  .waterTrackerWrapper .background svg {
+    transform: scaleY(6.5) scaleX(6.5);
+    bottom: -900px;
   }
 }
-//
-//@media (max-width: 450px) {
-//  .waterTrackerWrapper {
-//    .background {
-//      svg {
-//        transform: scaleY(6.5) scaleX(6.5);
-//        bottom: -900px;
-//      }
-//    }
-//  }
-//}
 
 @media (max-width: 350px) {
-  .waterTrackerWrapper {
-    .background {
-      svg {
-        transform: scaleY(6.5) scaleX(6.5);
-        bottom: -930px;
-      }
-    }
+  .waterTrackerWrapper .background svg {
+    transform: scaleY(6.5) scaleX(6.5);
+    bottom: -930px;
   }
+}
+
+.waterLevelLabel {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #C2C5F3;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  z-index: 3;
 }

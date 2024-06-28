@@ -1,16 +1,16 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react'
 
-import cs from 'classnames';
-import useSound from 'use-sound';
+import cs from 'classnames'
+import useSound from 'use-sound'
 
-import NextIcon from '@/assets/images/media/next.svg';
-import PauseIcon from '@/assets/images/media/pause.svg';
-import PlayIcon from '@/assets/images/media/play.svg';
-import PrevIcon from '@/assets/images/media/prev.svg';
-import musicSrc from '@/assets/media/music.mp3';
-import { IMedia } from '@/utils/types/media';
+import NextIcon from '@/assets/images/media/next.svg'
+import PauseIcon from '@/assets/images/media/pause.svg'
+import PlayIcon from '@/assets/images/media/play.svg'
+import PrevIcon from '@/assets/images/media/prev.svg'
+import { IMedia } from '@/utils/types/media'
 
-import css from './MediaPlayer.module.scss';
+import { Loader } from '@/components/Loader'
+import css from './MediaPlayer.module.scss'
 
 export type MediaPlayerProps = {
     entryInfo?: IMedia;
@@ -21,6 +21,7 @@ export const MediaPlayer: FC<MediaPlayerProps> = (props) => {
     const { entryInfo, className } = props;
 
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isLoading, setIsLoading] = useState(true); // добавлено состояние загрузки
     const [time, setTime] = useState({
         min: '',
         sec: '',
@@ -30,9 +31,13 @@ export const MediaPlayer: FC<MediaPlayerProps> = (props) => {
         sec: '',
     });
 
-    const [seconds, setSeconds] = useState();
+    const [seconds, setSeconds] = useState<number | undefined>();
 
-    const [play, { pause, duration, sound }] = useSound(entryInfo.url);
+    const [play, { pause, duration, sound }] = useSound(entryInfo?.url, {
+        onload: () => setIsLoading(false), // изменяем состояние загрузки после загрузки
+        onplay: () => setIsPlaying(true),
+        onend: () => setIsPlaying(false),
+    });
 
     useEffect(() => {
         if (duration) {
@@ -44,17 +49,18 @@ export const MediaPlayer: FC<MediaPlayerProps> = (props) => {
                 sec: `${secRemain}`,
             });
         }
-    }, [isPlaying, duration]);
+    }, [duration]);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            if (sound && sound.playing) {
-                setSeconds(sound.seek([]));
-                const min = Math.floor(sound.seek([]) / 60);
-                const sec = Math.floor(sound.seek([]) % 60);
+            if (sound && sound.playing()) {
+                const currentSeconds = sound.seek() as number;
+                setSeconds(currentSeconds);
+                const min = Math.floor(currentSeconds / 60);
+                const sec = Math.floor(currentSeconds % 60);
                 setCurrTime({
                     min: `${min}`,
-                    sec: `${sec}`,
+                    sec: `${sec < 10 ? '0' : ''}${sec}`, // Добавляем 0 перед секундами если меньше 10
                 });
             }
         }, 1000);
@@ -73,12 +79,17 @@ export const MediaPlayer: FC<MediaPlayerProps> = (props) => {
         }
     };
 
+    useEffect(() => {
+        return () => {
+            if (sound) {
+                sound.stop(); // Останавливаем воспроизведение
+            }
+        };
+    }, [sound]);
+
     return (
         <>
             <div className={cs(css.mediaPlayer, className)} data-index={entryInfo?.id}>
-                {/* <div className={css.mediaImage}>
-                    <img src={entryInfo?.image} alt="meditation player" />
-                </div>*/}
                 <div className={css.mediaTitle}>
                     <div className={css.title}>{entryInfo?.name}</div>
                 </div>
@@ -116,7 +127,11 @@ export const MediaPlayer: FC<MediaPlayerProps> = (props) => {
                             <PrevIcon />
                         </div>
                     </button>
-                    {!isPlaying ? (
+                    {isLoading ? ( // отображаем лоадер пока загружаем
+                        <button className={css.playButton}>
+                            <Loader />
+                        </button>
+                    ) : !isPlaying ? (
                         <button className={css.playButton} onClick={playingButton}>
                             <PauseIcon />
                         </button>

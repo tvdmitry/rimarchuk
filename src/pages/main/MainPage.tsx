@@ -1,7 +1,6 @@
+import { ThunkDispatch } from '@reduxjs/toolkit'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { ThunkDispatch } from '@reduxjs/toolkit'
 
 import { Menu } from '@/modules/menu/Menu'
 import { PodcastsBlock } from '@/modules/podcastsBlock/PodcastsBlock'
@@ -26,13 +25,11 @@ const MainPage = () => {
     const [show, setShow] = useState(false);
     const [isScrollable, setIsScrollable] = useState(false);
     const [howManyScrolls, setHowManyScrolls] = useState(0);
-    /* const [userTokenFetched, setUserTokenFetched] = useState(false);*/
+    const [IsIdExists, setIsIdExists] = useState(false);
+    const [userObject, setUserObject] = useState();
     const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
     const userId: number = initDataUnsafe?.user?.id;
     const userName: string = initDataUnsafe?.user?.first_name;
-
-    // console.log(userId, 'userId');
-    // console.log(userName, 'userName');
 
     useEffect(() => {
         const handleResize = () => {
@@ -46,71 +43,61 @@ const MainPage = () => {
         };
     }, []);
 
-    //console.log(initDataUnsafe?.user, 'initDataUnsafe?.user');
-
     const authUser: AuthUser = useSelector((state: AuthResponse) => state.auth);
     const allUsers: AllUsers = useSelector((state: UserResponse) => state.user);
-    console.log(authUser, 'authUser');
-    console.log(allUsers.data.length, 'allUsers.data.length');
 
     useEffect(() => {
         const fetchData = async () => {
             if (!allUsers.data.length) {
                 await dispatch(getUsersAll());
             }
-            console.log(allUsers.data, 'allUsers.data');
             if (userId && userName) {
-                console.log('fetchData', userId, userName);
                 const isIdExists = allUsers.data.some((user) => +user.user_id === +userId);
+                setIsIdExists(isIdExists);
                 if (!isIdExists) {
                     setShow(true);
                     dispatch(setOpen(show));
-                    await dispatch(addNewUser({ user_id: +userId, user_name: userName }));
-                    await dispatch(authToken(Number(userId)));
-                } else {
-                    await dispatch(authToken(Number(userId)));
+                    dispatch(addNewUser({ user_id: userId, user_name: userName }));
+                }
+                const authResponse = await dispatch(authToken(Number(userId)));
+                if (authToken.fulfilled.match(authResponse)) {
                     await dispatch(getAffirmationAll());
                     await dispatch(getVideosAll());
+                } else {
+                    console.error('Error authenticating user:', authResponse.payload);
                 }
             }
         };
 
         fetchData();
-    }, [dispatch, allUsers.data, userId, userName, show]);
-
-    // useEffect(() => {
-    //     const fetchAllData = async () => {
-    //         await Promise.all([dispatch(authToken(Number(userId)))]);
-    //     };
-    //     fetchAllData();
-    // }, [dispatch, userId]);
+    }, [dispatch, allUsers.data, userId, userName]);
 
     useEffect(() => {
         const fetchUser = async () => {
             if (authUser.user[0]) {
-                console.log('fetchUser', authUser.user[0].api_token);
                 localStorage.setItem('api_token', authUser.user[0].api_token);
                 await dispatch(getUser());
             }
         };
 
-        //fetchUser();
-
         if (authUser.user.length > 0) {
             fetchUser();
         }
     }, [authUser.user, dispatch]);
+
     const isShow = useSelector((state: ModalsResponse) => state.modals.firstShow);
 
     useEffect(() => {
         const isAlreadyShowModals = localStorage.getItem('SHOWALLMODALS');
-        if (isShow && isAlreadyShowModals !== 'true') {
+        if (!isShow && isAlreadyShowModals !== 'true') {
             setIsScrollable(true);
             dispatch(openModal('ONBOARDINGTASKS'));
             localStorage.setItem('SHOWALLMODALS', 'true');
         }
-    }, [isShow, dispatch, isScrollable]);
+    }, [isShow, dispatch]);
 
+    const user = useSelector((state: UserResponse) => state.user.data);
+    const autherUser = user.find((user) => user.user_id === userId);
     return (
         <div className={css.container}>
             <div>

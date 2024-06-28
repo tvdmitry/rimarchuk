@@ -4,6 +4,7 @@ import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 
 import css from './AppLayout.module.scss'
+import LocationProvider from './LocationProvider'
 
 export const AppLayout = () => {
     // const [videoPlayed, setVideoPlayed] = useState(false);
@@ -21,7 +22,7 @@ export const AppLayout = () => {
    */
 
     return (
-        <>
+        <LocationProvider>
             <div className={css.layout}>
                 {/*{!videoPlayed && (*/}
                 {/*    <ReactPlayer*/}
@@ -43,6 +44,6 @@ export const AppLayout = () => {
                 {/*)}*/}
             </div>
             <Modal />
-        </>
+        </LocationProvider>
     );
 };
