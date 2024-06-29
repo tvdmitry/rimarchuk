@@ -1,8 +1,9 @@
+import css from './AppLayout.module.scss'
+import LocationProvider from './LocationProvider'
 import { Loader } from '@/components/Loader'
 import { Modal } from '@/components/Modal'
 import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
-
 import css from './AppLayout.module.scss'
 import LocationProvider from './LocationProvider'
 
@@ -43,6 +44,7 @@ export const AppLayout = () => {
                 </Suspense>
                 {/*)}*/}
             </div>
+
             <Modal />
         </LocationProvider>
     );

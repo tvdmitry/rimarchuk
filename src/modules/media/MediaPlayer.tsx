@@ -133,11 +133,11 @@ export const MediaPlayer: FC<MediaPlayerProps> = (props) => {
                         </button>
                     ) : !isPlaying ? (
                         <button className={css.playButton} onClick={playingButton}>
-                            <PauseIcon />
+                            <PlayIcon />
                         </button>
                     ) : (
                         <button className={css.playButton} onClick={playingButton}>
-                            <PlayIcon />
+                            <PauseIcon />
                         </button>
                     )}
                     <button>
