@@ -1,16 +1,16 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react';
 
-import cs from 'classnames'
-import useSound from 'use-sound'
+import cs from 'classnames';
+import useSound from 'use-sound';
 
-import NextIcon from '@/assets/images/media/next.svg'
-import PauseIcon from '@/assets/images/media/pause.svg'
-import PlayIcon from '@/assets/images/media/play.svg'
-import PrevIcon from '@/assets/images/media/prev.svg'
-import { IMedia } from '@/utils/types/media'
+import NextIcon from '@/assets/images/media/next.svg';
+import PauseIcon from '@/assets/images/media/pause.svg';
+import PlayIcon from '@/assets/images/media/play.svg';
+import PrevIcon from '@/assets/images/media/prev.svg';
+import { Loader } from '@/components/Loader';
+import { IMedia } from '@/utils/types/media';
 
-import { Loader } from '@/components/Loader'
-import css from './MediaPlayer.module.scss'
+import css from './MediaPlayer.module.scss';
 
 export type MediaPlayerProps = {
     entryInfo?: IMedia;
@@ -133,11 +133,11 @@ export const MediaPlayer: FC<MediaPlayerProps> = (props) => {
                         </button>
                     ) : !isPlaying ? (
                         <button className={css.playButton} onClick={playingButton}>
-                            <PlayIcon />
+                            <PauseIcon />
                         </button>
                     ) : (
                         <button className={css.playButton} onClick={playingButton}>
-                            <PauseIcon />
+                            <PlayIcon />
                         </button>
                     )}
                     <button>

@@ -15,7 +15,6 @@ import { addVolumeWater, delVolumeWater } from '@/store/waterAddSlice'
 import { getWater } from '@/store/waterGetSlice'
 import { UserGet, UserGetResponse } from '@/utils/types'
 import { GetWaterResponse } from '@/utils/types/water'
-
 import { useTelegram } from '@/utils/hooks/useTelegram'
 import { useLocation, useNavigate } from 'react-router'
 import css from './WaterTracker.module.scss'

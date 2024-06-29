@@ -1,14 +1,16 @@
-import { useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import ArrowIcon from '@/assets/images/arrowIcon/arrow.svg'
-import { useTelegram } from '@/utils/hooks/useTelegram'
-import { AuthResponse, AuthUser } from '@/utils/types'
-import css from './OnboardingTasks.module.scss'
+import ArrowIcon from '@/assets/images/arrowIcon/arrow.svg';
+import { useTelegram } from '@/utils/hooks/useTelegram';
+import { AuthResponse, AuthUser } from '@/utils/types';
+
+import css from './OnboardingTasks.module.scss';
 
 export const OnboardingTasks = ({ next }: { next: () => void }) => {
     const { initDataUnsafe } = useTelegram();
+    const [userImg, setUserImg] = useState('');
     const authUser: AuthUser = useSelector((state: AuthResponse) => state.auth);
     const dispatch = useDispatch();
     const modalRef = useRef<HTMLDivElement>(null);
@@ -16,7 +18,18 @@ export const OnboardingTasks = ({ next }: { next: () => void }) => {
         modalRef.current?.classList.add(css.open);
     }, []);
     const userName = initDataUnsafe?.user?.first_name;
-    const userImg = initDataUnsafe?.user?.photo_url
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            if (authUser.user[0]) {
+                setUserImg(authUser?.user?.[0].user_img);
+            }
+        };
+
+        if (authUser.user.length > 0) {
+            fetchUser();
+        }
+    }, [authUser.user]);
     return (
         <div className={css.ModalWindow} ref={modalRef}>
             <div className={css.wrapper}>
