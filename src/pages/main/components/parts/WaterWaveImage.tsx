@@ -7,7 +7,7 @@ export type WaterWaveImageProps = {
 
 const WaterWaveImage: FC<WaterWaveImageProps> = ({ waterLevel }) => {
     return (
-        <div className={css.waterTrackerProgress} style={{ height: `${waterLevel}%` }}>
+        <div className={css.waterTrackerProgress} style={{ bottom: `${waterLevel}px` }}>
             <div className={css.background}>
                 <svg
                     version="1.1"

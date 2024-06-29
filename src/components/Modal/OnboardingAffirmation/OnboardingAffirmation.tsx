@@ -1,8 +1,11 @@
-import { closeModal } from '@/store/modalsSlice'
-import { ModalsResponse } from '@/utils/types/modals'
 import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
+import { closeModal } from '@/store/modalsSlice'
+import { ModalsResponse } from '@/utils/types/modals'
+
 import css from './OnboardingAffirmation.module.scss'
+
 export const OnboardingAffirmation = ({ next }: { next: () => void }) => {
     const dispatch = useDispatch();
     const close = () => dispatch(closeModal());

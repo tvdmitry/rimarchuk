@@ -1,20 +1,17 @@
 .ModalWindow {
   position: fixed;
-	top: 0;
-	left: -23.5%;
-	opacity: 0;
-  width: 550px; /* Диаметр круга */
-  height: 400px; /* Диаметр круга */
+  left: 50%;
+  top: 28%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
   background-color: #2545ED;
-  border-bottom-left-radius: 100%; /* Закругленный внешний край */
-	border-bottom-right-radius: 100%;
-	transform: translateX(-50%); /* Центрируем по горизонтали */
-  overflow: hidden; /* Скрыть лишнее */
+  cursor: default;
+	transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+	opacity: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
   z-index: 9999;
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
 .ModalWindow.open {
@@ -35,19 +32,28 @@
 }
 
 .wrapper {
-  display: flex;
+	display: flex;
   flex-direction: column;
+	align-items: center;
+	justify-content: center;
   gap: 38px;
   padding: 20px;
-  align-items: center;
+  position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 500px;
+	height: 500px;
+	border-radius: 50%;
+	background-color: #2545ED;
+	transform: translate(-50%, -50%);
 }
 
-@media (min-width: 558px) {
-  .ModalWindow {
-    width: 550px; /* Увеличенная ширина для больших экранов */
-    height: 500px; /* Увеличенная высота для больших экранов */
-  }
-}
+// @media (min-width: 558px) {
+//   .ModalWindow {
+//     width: 550px; /* Увеличенная ширина для больших экранов */
+//     height: 500px; /* Увеличенная высота для больших экранов */
+//   }
+// }
 
 .affirmation__container {
 	display: flex;
