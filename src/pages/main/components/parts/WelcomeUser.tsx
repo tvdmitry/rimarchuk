@@ -29,6 +29,13 @@ export const WelcomeUser = () => {
             fetchUser();
         }
     }, [authUser.user]);
+    
+    const truncate = (str: string, maxLength: number) => {
+        if (str.length > maxLength) {
+            return str.slice(0, maxLength) + `...`;
+        }
+        return str;
+    };
 
     return (
         <div className={css.welcomeUser}>
@@ -47,7 +54,7 @@ export const WelcomeUser = () => {
 
                         <div className={css.userInfo}>
                             <div className={css.helloUser}>Привет</div>
-                            <div className={css.username}>{userName ?? 'Аноним'}</div>
+                            <div className={css.username}>{truncate(userName, 7) ?? 'Аноним'}</div>
                         </div>
                     </div>
                     <button type="button" className={css.arrowIcon}>
