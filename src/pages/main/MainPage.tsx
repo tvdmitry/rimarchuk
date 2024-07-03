@@ -16,6 +16,7 @@ import { useTelegram } from '@/utils/hooks/useTelegram'
 import { AllUsers, AuthResponse, AuthUser, UserResponse } from '@/utils/types'
 import { ModalsResponse } from '@/utils/types/modals'
 
+import { getWater } from '@/store/waterGetSlice'
 import css from './Main.module.scss'
 import { AffirmationDay } from './components/AffirmationDay'
 import { BookBlock } from './components/BookBlock'
@@ -93,6 +94,7 @@ const MainPage = () => {
         if (authUser.user[0]) {
             localStorage.setItem('api_token', authUser.user[0].api_token);
             await dispatch(getUser());
+            await dispatch(getWater());
         }
     }, [authUser.user, dispatch]);
 
