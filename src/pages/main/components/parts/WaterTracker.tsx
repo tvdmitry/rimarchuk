@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router'
 
 import { ThunkDispatch } from '@reduxjs/toolkit'
 import cs from 'classnames'
@@ -13,10 +14,10 @@ import WaterWaveImage from '@/pages/main/components/parts/WaterWaveImage'
 import { getUser } from '@/store/currentUserSlice'
 import { addVolumeWater, delVolumeWater } from '@/store/waterAddSlice'
 import { getWater } from '@/store/waterGetSlice'
+import { useTelegram } from '@/utils/hooks/useTelegram'
 import { UserGet, UserGetResponse } from '@/utils/types'
 import { GetWaterResponse } from '@/utils/types/water'
-import { useTelegram } from '@/utils/hooks/useTelegram'
-import { useLocation, useNavigate } from 'react-router'
+
 import css from './WaterTracker.module.scss'
 import { WaterVolume } from './WaterVolume'
 
@@ -40,14 +41,21 @@ export const WaterTracker = () => {
     const [containerHeight, setContainerHeight] = useState(CONTAINER_HEIGHT_PX);
     const [localSliderValue, setLocalSliderValue] = useState(prevSliderValue);
     const [adjustedWaterHeight, setAdjustedWaterHeight] = useState(0);
+
     useEffect(() => {
         const fetchGetWater = async () => {
             await dispatch(getWater());
             await dispatch(getUser());
+
+            // Update local storage with the latest value from the server
+            const updatedWaterVolume = waterVolume?.data?.data ?? 0;
+            setPrevSliderValue(updatedWaterVolume);
+            setLocalSliderValue(updatedWaterVolume);
+            localStorage.setItem('prevSliderValue', updatedWaterVolume.toString());
         };
 
         fetchGetWater();
-    }, [dispatch]);
+    }, [dispatch, waterVolume?.data?.data]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -71,10 +79,6 @@ export const WaterTracker = () => {
         setAdjustedWaterHeight((localSliderValue / MAX_SIZE) * 350);
     }, [localSliderValue, containerHeight]);
 
-    useEffect(() => {
-        localStorage.setItem('prevSliderValue', prevSliderValue.toString());
-    }, [prevSliderValue]);
-
     const handleIncrease = () => {
         setLocalSliderValue(Math.min(localSliderValue + 320, MAX_SIZE));
     };
@@ -94,20 +98,29 @@ export const WaterTracker = () => {
 
         const idUser = currentUser.data.user_id;
 
-        if (diff > 0) {
-            await dispatch(addVolumeWater({ user_id: idUser, water_ml: diff }));
-        } else if (diff < 0) {
-            await dispatch(delVolumeWater({ user_id: idUser, water_ml: -diff }));
-        }
+        try {
+            if (diff > 0) {
+                await dispatch(addVolumeWater({ user_id: idUser, water_ml: diff }));
+            } else if (diff < 0) {
+                await dispatch(delVolumeWater({ user_id: idUser, water_ml: -diff }));
+            }
 
-        setPrevSliderValue(localSliderValue);
-        await dispatch(getWater());
-        await dispatch(getUser());
+            await dispatch(getWater());
+            await dispatch(getUser());
+
+            // Update local storage and prevSliderValue after server update
+            setPrevSliderValue(localSliderValue);
+            localStorage.setItem('prevSliderValue', localSliderValue.toString());
+        } catch (error) {
+            console.error('Failed to update water value:', error);
+        }
     };
+
     BackButton.show();
     BackButton.onClick(() => {
         navigate(location.state?.from ?? '/');
-    })
+    });
+
     return (
         <div className={css.waterTrackerWrapper}>
             <div className={css.waterTracker}>

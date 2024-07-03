@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import ArrowIcon from '@/assets/images/arrowIcon/arrow.svg';
-import { useTelegram } from '@/utils/hooks/useTelegram';
-import { AuthResponse, AuthUser } from '@/utils/types';
+import ArrowIcon from '@/assets/images/arrowIcon/arrow.svg'
+import { useTelegram } from '@/utils/hooks/useTelegram'
+import { AuthResponse, AuthUser } from '@/utils/types'
 
-import css from './OnboardingTasks.module.scss';
+import css from './OnboardingTasks.module.scss'
 
 export const OnboardingTasks = ({ next }: { next: () => void }) => {
     const { initDataUnsafe } = useTelegram();
@@ -30,6 +30,14 @@ export const OnboardingTasks = ({ next }: { next: () => void }) => {
             fetchUser();
         }
     }, [authUser.user]);
+
+    const truncate = (str: string, maxLength: number) => {
+        if (str.length > maxLength) {
+            return str.slice(0, maxLength) + `...`;
+        }
+        return str;
+    };
+
     return (
         <div className={css.ModalWindow} ref={modalRef}>
             <div className={css.wrapper}>
@@ -48,7 +56,7 @@ export const OnboardingTasks = ({ next }: { next: () => void }) => {
                                 )}
                                 <div className={css.userInfo}>
                                     <div className={css.helloUser}>Привет</div>
-                                    <div className={css.username}>{userName ?? 'Аноним'}</div>
+                                    <div className={css.username}>{truncate(userName, 7) ?? 'Аноним'}</div>
                                 </div>
                             </div>
                             <button type="button" className={css.arrowIcon}>

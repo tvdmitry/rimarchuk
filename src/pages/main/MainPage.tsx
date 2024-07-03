@@ -1,97 +1,106 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { ThunkDispatch } from '@reduxjs/toolkit';
+import { ThunkDispatch } from '@reduxjs/toolkit'
 
-import { Menu } from '@/modules/menu/Menu';
-import { PodcastsBlock } from '@/modules/podcastsBlock/PodcastsBlock';
-import { VideoBlock } from '@/modules/videoBlock/VideoBlock';
-import { getAffirmationAll } from '@/store/affirmationSlice';
-import { authToken } from '@/store/authSlice';
-import { getUser } from '@/store/currentUserSlice';
-import { openModal, setOpen } from '@/store/modalsSlice';
-import { addNewUser, getUsersAll } from '@/store/userSlice';
-import { getVideosAll } from '@/store/videosSlice';
-import { useTelegram } from '@/utils/hooks/useTelegram';
-import { AllUsers, AuthResponse, AuthUser, UserResponse } from '@/utils/types';
-import { ModalsResponse } from '@/utils/types/modals';
+import { Menu } from '@/modules/menu/Menu'
+import { PodcastsBlock } from '@/modules/podcastsBlock/PodcastsBlock'
+import { VideoBlock } from '@/modules/videoBlock/VideoBlock'
+import { getAffirmationAll } from '@/store/affirmationSlice'
+import { authToken } from '@/store/authSlice'
+import { getUser } from '@/store/currentUserSlice'
+import { openModal, setOpen } from '@/store/modalsSlice'
+import { addNewUser, getUsersAll } from '@/store/userSlice'
+import { getVideosAll } from '@/store/videosSlice'
+import { useTelegram } from '@/utils/hooks/useTelegram'
+import { AllUsers, AuthResponse, AuthUser, UserResponse } from '@/utils/types'
+import { ModalsResponse } from '@/utils/types/modals'
 
-import css from './Main.module.scss';
-import { AffirmationDay } from './components/AffirmationDay';
-import { BookBlock } from './components/BookBlock';
-import { WaterTracker } from './components/WaterTracker';
+import css from './Main.module.scss'
+import { AffirmationDay } from './components/AffirmationDay'
+import { BookBlock } from './components/BookBlock'
+import { WaterTracker } from './components/WaterTracker'
 
 const MainPage = () => {
     const { initDataUnsafe } = useTelegram();
     const [, setIsMobile] = useState(window.innerWidth < 500);
     const [show, setShow] = useState(false);
     const [, setIsScrollable] = useState(false);
-
     const [, setIsIdExists] = useState(false);
-
+    const [isFetchingData, setIsFetchingData] = useState(false); // Добавлен флаг для предотвращения повторных вызовов
     const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
     const userId: number = initDataUnsafe?.user?.id;
     const userName: string = initDataUnsafe?.user?.first_name;
+    const userOP = initDataUnsafe?.chat;
+
+    // Мемоизация функции handleResize
+    const handleResize = useCallback(() => {
+        setIsMobile(window.innerWidth < 500);
+    }, []);
 
     useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 500);
-        };
-
         window.addEventListener('resize', handleResize);
 
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, []);
+    }, [handleResize]);
 
-    const authUser: AuthUser = useSelector((state: AuthResponse) => state.auth);
     const allUsers: AllUsers = useSelector((state: UserResponse) => state.user);
+    const authUser: AuthUser = useSelector((state: AuthResponse) => state.auth);
+    const isShow = useSelector((state: ModalsResponse) => state.modals.firstShow);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            if (!allUsers.data.length) {
-                await dispatch(getUsersAll());
+    // Мемоизация функции fetchData
+    const fetchData = useCallback(async () => {
+        if (isFetchingData) return; // Предотвращение повторных вызовов
+        setIsFetchingData(true); // Установка флага загрузки
+
+        console.log('Fetching data...');
+        if (!allUsers.data.length) {
+            console.log('Dispatching getUsersAll');
+            await dispatch(getUsersAll());
+        }
+        if (userId && userName) {
+            const isIdExists = allUsers.data.some((user) => +user.user_id === +userId);
+            setIsIdExists(isIdExists);
+            if (!isIdExists) {
+                setShow(true);
+                dispatch(setOpen(show));
+                console.log(userOP, 'user');
+                dispatch(addNewUser({ user_id: userId, user_name: userName }));
             }
-            if (userId && userName) {
-                const isIdExists = allUsers.data.some((user) => +user.user_id === +userId);
-                setIsIdExists(isIdExists);
-                if (!isIdExists) {
-                    setShow(true);
-                    dispatch(setOpen(show));
-                    dispatch(addNewUser({ user_id: userId, user_name: userName }));
-                }
-                const token = localStorage.getItem('api_token');
+            const token = localStorage.getItem('api_token');
+            if (!token) {
+                console.log('No token found, dispatching authToken');
                 const authResponse = await dispatch(authToken(Number(userId)));
-                if (!token) {
-                    const authResponse = await dispatch(authToken(Number(userId)));
-                    if (authToken.fulfilled.match(authResponse)) {
-                        await dispatch(getAffirmationAll());
-                        await dispatch(getVideosAll());
-                    }
-                } else {
-                    console.error('Error authenticating user:', authResponse.payload);
+                if (authToken.fulfilled.match(authResponse)) {
+                    await dispatch(getAffirmationAll());
+                    await dispatch(getVideosAll());
                 }
             }
-        };
+        }
 
-        fetchData();
-    }, [dispatch, allUsers.data, userId, userName]);
+        setIsFetchingData(false); // Сброс флага загрузки после завершения
+    }, [dispatch, allUsers.data, userId, userName, show, userOP, isFetchingData]);
 
     useEffect(() => {
-        const fetchUser = async () => {
-            if (authUser.user[0]) {
-                localStorage.setItem('api_token', authUser.user[0].api_token);
-                await dispatch(getUser());
-            }
-        };
+        fetchData();
+    }, [fetchData]);
 
-        if (authUser.user.length > 0 && !localStorage.getItem('api_token')) {
-            fetchUser();
+    // Мемоизация функции fetchUser
+    const fetchUser = useCallback(async () => {
+        console.log('Fetching user...');
+        if (authUser.user[0]) {
+            localStorage.setItem('api_token', authUser.user[0].api_token);
+            await dispatch(getUser());
         }
     }, [authUser.user, dispatch]);
 
-    const isShow = useSelector((state: ModalsResponse) => state.modals.firstShow);
+    useEffect(() => {
+        if (authUser.user.length > 0 && !localStorage.getItem('api_token')) {
+            fetchUser();
+        }
+    }, [authUser.user, fetchUser]);
 
     useEffect(() => {
         const isAlreadyShowModals = localStorage.getItem('SHOWALLMODALS');
