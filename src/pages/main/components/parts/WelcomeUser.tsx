@@ -25,13 +25,13 @@ export const WelcomeUser = () => {
             }
         };
 
-        if (authUser.user.length > 0) {
+        if (authUser.user?.length > 0) {
             fetchUser();
         }
     }, [authUser.user]);
     
     const truncate = (str: string, maxLength: number) => {
-        if (str.length > maxLength) {
+        if (str?.length > maxLength) {
             return str.slice(0, maxLength) + `...`;
         }
         return str;
