@@ -16,3 +16,7 @@ export const useTelegram = () => {
     //     },
     // };
 };
+
+export const useTelegramWebviewProxy = () => {
+    return (window as any)?.TelegramWebviewProxy ?? {};
+}
