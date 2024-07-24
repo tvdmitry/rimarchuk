@@ -201,13 +201,17 @@ export const InfoBuy: FC<InfoBuyProps> = (props) => {
                 {isShowManual && manual.data ? manual?.data.name : null}
                 {isShowCourse && infoBuy?.title}
             </div>
-            <div className={`${css.contentDescription} ${css.visible}`}>
-                {isShowManual && manual.data ? manual.data.description : null}
-            </div>
-            <div className={`${css.contentDescription1} ${css.visible}`}>
-                {isShowCourse && (infoBuy as ICourseCard)?.contentInfo}
-            </div>
-            <div className={css.infoBuyChildren}>{children}</div>
+            {isShowManual && (
+                <div className={`${css.contentDescription2} ${css.visible}`}>
+                    {isShowManual && manual.data ? manual.data.description : null}
+                </div>
+            )}
+            {isShowCourse && (infoBuy as ICourseCard).contentInfo && (
+                <div className={`${css.contentDescription1} ${css.visible}`}>
+                    {(infoBuy as ICourseCard)?.contentInfo}
+                </div>
+            )}
+            {isShowCourse && <div className={css.infoBuyChildrenCourse}>{children}</div>}
             {infoBuy?.id !== '5' && !isIdInCourseIdList && !isIdInManualIdList && !isShowManual ? (
                 <div className={css.contentCostPrice}>
                     <div className={css.content}>{(infoBuy as ICourseCard)?.buttonText}</div>

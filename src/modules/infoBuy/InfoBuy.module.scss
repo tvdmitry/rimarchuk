@@ -158,7 +158,23 @@
 
 .contentDescription1.visible {
   max-height: 800px; /* Adjust this value as needed */
-  padding-block-start: 12px;
+  // padding-block-start: 12px;
+}
+
+.contentDescription2 {
+  width: 100%;
+  color: #C2C5F3;
+  font-size: 14px;
+  letter-spacing: -0.154px;
+  max-height: 0;
+  overflow: hidden;
+  text-align: left;
+  transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+}
+
+.contentDescription2.visible {
+  max-height: 800px; /* Adjust this value as needed */
+  // padding-block-start: 12px;
 }
 
 .button {
@@ -245,4 +261,11 @@
 
 ul {
   padding-left: 16px;
+}
+
+.infoBuyChildrenCourse {
+  margin-top: 32px;
+  margin-bottom: 24px;
+  // padding: 16px; /* Add padding inside each section for better spacing */
+  background-color: transparent;
 }
