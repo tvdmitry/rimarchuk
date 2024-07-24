@@ -51,7 +51,7 @@ export const data: IBookBlock[] = [
                 descriptionPrice: 'Стоимость',
                 buttonText: 'Купить',
                 buttonBuy: 'Купить',
-                bonus: true,
+                bonus: false,
             },
             {
                 contentTitle: 'КОНСУЛЬТАЦИЯ И РАЗБОР АНАЛИЗОВ',

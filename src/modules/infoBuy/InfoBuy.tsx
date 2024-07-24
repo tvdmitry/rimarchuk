@@ -143,105 +143,118 @@ export const InfoBuy: FC<InfoBuyProps> = (props) => {
         );
     }
 
+    if (infoBuy?.id === '4') {
+        return (
+            <div className={css.infoBuy}>
+                <div className={css.contentTitle}>{(infoBuy as IBookBlock)?.title}</div>
+                <div className={`${css.contentDescription} ${css.visible}`}>
+                    {(infoBuy as IBookBlock).content.map((item) => (
+                        <div className={css.infoBuyChildren} key={item.contentTitle}>
+                            <div style={{ marginBottom: '12px' }} className={css.content}>
+                                {item.contentInfo}
+                            </div>
+                            <ul>
+                                {item.contentList?.map((contentItem) => (
+                                    <li key={contentItem.title}>{contentItem.title}</li>
+                                ))}
+                            </ul>
+                            {item.bonus && (
+                                <div>
+                                    <div style={{ marginBottom: '12px', marginTop: '12px' }}>
+                                        <BonusInfoBuy>мини курс «Тело - храм» в подарок</BonusInfoBuy>
+                                    </div>
+                                    <BonusInfoBuy>печатная книга «Будь здоровым сейчас!»</BonusInfoBuy>
+                                </div>
+                            )}
+                            <div className={css.contentCostPrice}>
+                                <div className={css.content}>{item.descriptionPrice}</div>
+                                <div className={css.contentPrice}>{item.price} ₽</div>
+                            </div>
+                            <Link
+                                to={{
+                                    pathname: `/delivery/${id}`,
+                                    search: `price=${
+                                        isShowCourse ? item.price : isShowManual ? infoBuy.cost : ''
+                                    }&delivery=${isShowCourse ? 'course' : isShowManual ? 'manual' : ''}`,
+                                }}
+                                className={css.contentPriceButton}
+                            >
+                                <div className={css.contentPriceLink}>
+                                    {(isShowCourse || isShowBook) && (
+                                        <div className={css.contentPriceText}>{item.buttonBuy}</div>
+                                    )}
+                                </div>
+                            </Link>
+                        </div>
+                    ))}
+                </div>
+                {(infoBuy as IManuals)?.book && (
+                    <PDFViewer pdfUrl="https://content-water.plutus-fin.ru/books/book_1.pdf" />
+                )}
+            </div>
+        );
+    }
+
     return (
         <div className={css.infoBuy}>
             <div className={css.contentTitle}>
-                {isShowCourse && (infoBuy as ICourseCard)?.title}
-                {isShowManual && (infoBuy as IManuals)?.title}
-                {(infoBuy as IBookBlock)?.title}
+                {isShowManual && manual.data ? manual?.data.name : null}
+                {isShowCourse && infoBuy?.title}
             </div>
-            {/* <div className={css.contentDescription}>{isShowManual && manual.data ? manual.data.description : null}</div> */}
             <div className={`${css.contentDescription} ${css.visible}`}>
-                {(infoBuy as IBookBlock).content.map((item) => (
-                    <div className={css.infoBuyChildren} key={item.contentTitle}>
-                        <div style={{ marginBottom: '12px' }} className={css.content}>
-                            {item.contentInfo}
-                        </div>
-                        <ul>
-                            {item.contentList?.map((contentItem) => (
-                                <li key={contentItem.title}>{contentItem.title}</li>
-                            ))}
-                        </ul>
-                        {item.bonus && (
-                            <div>
-                                <div style={{ marginBottom: '12px', marginTop: '12px' }}>
-                                    <BonusInfoBuy>мини курс «Тело - храм» в подарок</BonusInfoBuy>
-                                </div>
-                                <BonusInfoBuy>печатная книга «Будь здоровым сейчас!»</BonusInfoBuy>
-                            </div>
-                        )}
-                        <div className={css.contentCostPrice}>
-                            <div className={css.content}>{item.descriptionPrice}</div>
-                            <div className={css.contentPrice}>{item.price} ₽</div>
-                        </div>
-                        <Link
-                            to={{
-                                pathname: `/delivery/${id}`,
-                                search: `price=${
-                                    isShowCourse ? item.price : isShowManual ? infoBuy.cost : ''
-                                }&delivery=${isShowCourse ? 'course' : isShowManual ? 'manual' : ''}`,
-                            }}
-                            className={css.contentPriceButton}
-                        >
-                            <div className={css.contentPriceLink}>
-                                {(isShowCourse || isShowBook) && (
-                                    <div className={css.contentPriceText}>{item.buttonBuy}</div>
-                                )}
-                            </div>
-                        </Link>
-                    </div>
-                ))}
+                {isShowManual && manual.data ? manual.data.description : null}
             </div>
-            {/* <div className={css.infoBuyChildren}>{children}</div>
-            {infoBuy?.id !== '5' && !isIdInCourseIdList && !isIdInManualIdList && !isShowManual && (
-                <button type="button" className={css.contentCostButton}>
-                    <div className={css.contentCostLink}>
-                        {isShowBook && (
-                            <div className={css.contentCostText}>{(infoBuy as IBook)?.descriptionPrice}</div>
-                        )}
-                        {isShowCourse && (
-                            <div className={css.contentCostText}>{(infoBuy as ICourseCard)?.buttonText}</div>
-                        )}
-                        {!isShowBook && <div className={css.contentCostPrice}>{(infoBuy as IBook)?.price} ₽</div>}
-                        {isShowCourse && (
-                            <div className={css.contentCostPrice}>{`${(infoBuy as ICourseCard)?.price} ₽`}</div>
-                        )}
-                    </div>
-                </button>
-            )}
-            {!isIdInManualIdList && manual.data && isShowManual && (
-                <button type="button" className={css.contentCostButton}>
-                    <div className={css.contentCostLink}>
-                        <div className={css.contentCostText}>{(infoBuy as IManuals)?.descriptionPrice}</div>
-                        <div className={css.contentCostPrice}>
-                            <div className={css.contentCostPriceManual}>
-                                <span className={css.contentCostText}>Стоимость методички</span>
-                                <span>{manual.data.cost}₽ </span>
-                            </div>
-                        </div>
-                    </div>
-                </button>
-            )}
-            {!isIdInManualIdList && manual.data && isShowManual && (
+            <div className={`${css.contentDescription1} ${css.visible}`}>
+                {isShowCourse && (infoBuy as ICourseCard)?.contentInfo}
+            </div>
+            <div className={css.infoBuyChildren}>{children}</div>
+            {infoBuy?.id !== '5' && !isIdInCourseIdList && !isIdInManualIdList && !isShowManual ? (
+                <div className={css.contentCostPrice}>
+                    <div className={css.content}>{(infoBuy as ICourseCard)?.buttonText}</div>
+                    <div className={css.contentPrice}>{(infoBuy as ICourseCard)?.price} ₽</div>
+                </div>
+            ) : null}
+            {!isIdInManualIdList && manual.data && isShowManual ? (
+                <div className={css.contentCostPrice}>
+                    <div className={css.content}>Стоимость методички</div>
+                    <div className={css.contentPrice}>{(infoBuy as Manuals)?.cost} ₽</div>
+                </div>
+            ) : null}
+            {infoBuy?.id !== '5' && !isIdInCourseIdList && !isIdInManualIdList && !isShowManual ? (
                 <Link
                     to={{
                         pathname: `/delivery/${id}`,
                         search: `price=${
-                            isShowCourse
-                                ? (infoBuy as ICourseCard)?.price
-                                : isShowManual
-                                ? (infoBuy as IManuals)?.cost
-                                : ''
-                        }&delivery=${isShowCourse ? 'course' : isShowManual ? 'manual' : ''}`,
+                            isShowCourse ? (infoBuy as ICourseCard).price : isShowManual ? infoBuy?.cost : ''
+                        }&delivery=${isShowCourse ? 'course' : isShowManual ? 'manual' : null}`,
                     }}
                     className={css.contentPriceButton}
                 >
                     <div className={css.contentPriceLink}>
-                        <div className={css.contentPriceText}>Купить методичку</div>
+                        {isShowCourse ? (
+                            <div className={css.contentPriceText}>{(infoBuy as ICourseCard)?.buttonBuy}</div>
+                        ) : null}
                     </div>
                 </Link>
-            )} */}
-            {(infoBuy as IManuals)?.book && <PDFViewer pdfUrl="https://content-water.plutus-fin.ru/books/book_1.pdf" />}
+            ) : null}
+
+            {!isIdInManualIdList && manual.data && isShowManual ? (
+                <Link
+                    to={{
+                        pathname: `/delivery/${id}`,
+                        search: `price=${
+                            isShowCourse ? (infoBuy as Manuals).price : isShowManual ? infoBuy?.cost : ''
+                        }&delivery=${isShowCourse ? 'course' : isShowManual ? 'manual' : null}`,
+                    }}
+                    className={css.contentPriceButton}
+                >
+                    <div className={css.contentPriceLink}>
+                        {isShowManual && !isIdInManualIdList ? (
+                            <div className={css.contentPriceText}>Купить методичку</div>
+                        ) : null}
+                    </div>
+                </Link>
+            ) : null}
         </div>
     );
 };
