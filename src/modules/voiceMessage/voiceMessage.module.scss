@@ -1,0 +1,39 @@
+.voiceMessage {
+	margin-top: 24px;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 44px;
+	background: transparent;
+	border: none;
+	gap: 16px;
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+
+	.title {
+		color: #4563FF;
+		font-weight: 600;
+		font-size: 14px;
+		line-height: 18px;
+		letter-spacing: -0.15px;
+		text-align: start;
+	}
+	.text {
+		color: #FFFFFF;
+		font-weight: 500;
+		font-size: 17px;
+		line-height: 22px;
+		letter-spacing: -0.44px;
+		text-align: start;
+	}
+}
+
+.playButton {
+	padding: 0;
+  cursor: pointer;
+  border: 0;
+}

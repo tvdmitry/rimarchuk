@@ -52,6 +52,7 @@ export const data: IBookBlock[] = [
                 buttonText: 'Купить',
                 buttonBuy: 'Купить',
                 bonus: false,
+                voiceMessage: true,
             },
             {
                 contentTitle: 'КОНСУЛЬТАЦИЯ И РАЗБОР АНАЛИЗОВ',
@@ -73,6 +74,7 @@ export const data: IBookBlock[] = [
                 buttonText: 'Купить',
                 buttonBuy: 'Купить',
                 descriptionPrice: 'Стоимость',
+                voiceMessage: true,
             },
             {
                 contentTitle: 'ЛИЧНАЯ ПРОГРАММА ‌БЕЗ СОПРОВОЖДЕНИЯ',
@@ -90,6 +92,7 @@ export const data: IBookBlock[] = [
                 buttonText: 'Купить',
                 buttonBuy: 'Купить',
                 descriptionPrice: 'Стоимость',
+                voiceMessage: true,
             },
             {
                 contentTitle:
@@ -108,6 +111,7 @@ export const data: IBookBlock[] = [
                 buttonText: 'Купить',
                 buttonBuy: 'Купить',
                 descriptionPrice: 'Стоимость',
+                voiceMessage: true,
             },
         ],
         title: 'Личная консультация от Марины Римарчук',
