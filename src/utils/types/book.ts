@@ -13,7 +13,7 @@ export interface IBook {
     price?: string;
     descriptionPrice?: string;
     bonus?: boolean;
-    voiceMessage?: boolean;
+    voiceMessage?: string;
 }
 
 export interface IBookBlock {

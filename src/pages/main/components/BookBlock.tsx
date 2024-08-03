@@ -52,7 +52,7 @@ export const data: IBookBlock[] = [
                 buttonText: 'Купить',
                 buttonBuy: 'Купить',
                 bonus: false,
-                voiceMessage: true,
+                voiceMessage: 'https://content-water.plutus-fin.ru/VoiceMessages/Личная программа с сопр.2 месяца.ogg',
             },
             {
                 contentTitle: 'КОНСУЛЬТАЦИЯ И РАЗБОР АНАЛИЗОВ',
@@ -74,7 +74,7 @@ export const data: IBookBlock[] = [
                 buttonText: 'Купить',
                 buttonBuy: 'Купить',
                 descriptionPrice: 'Стоимость',
-                voiceMessage: true,
+                voiceMessage: 'https://content-water.plutus-fin.ru/VoiceMessages/Консультация и разбор анализов.ogg',
             },
             {
                 contentTitle: 'ЛИЧНАЯ ПРОГРАММА ‌БЕЗ СОПРОВОЖДЕНИЯ',
@@ -92,7 +92,8 @@ export const data: IBookBlock[] = [
                 buttonText: 'Купить',
                 buttonBuy: 'Купить',
                 descriptionPrice: 'Стоимость',
-                voiceMessage: true,
+                voiceMessage:
+                    'https://content-water.plutus-fin.ru/VoiceMessages/Личная программа без сопровождения.ogg',
             },
             {
                 contentTitle:
@@ -111,7 +112,8 @@ export const data: IBookBlock[] = [
                 buttonText: 'Купить',
                 buttonBuy: 'Купить',
                 descriptionPrice: 'Стоимость',
-                voiceMessage: true,
+                voiceMessage:
+                    'https://content-water.plutus-fin.ru/VoiceMessages/Личная программа с сопровождением 1 месяц.ogg',
             },
         ],
         title: 'Личная консультация от Марины Римарчук',
@@ -174,7 +176,7 @@ export const data: IBookBlock[] = [
                 price: '15 990',
                 buttonBuy: 'Купить',
                 buttonText: 'Купить',
-            }
+            },
         ],
     },
     {

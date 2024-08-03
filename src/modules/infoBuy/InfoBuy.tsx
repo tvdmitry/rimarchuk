@@ -106,7 +106,9 @@ export const InfoBuy: FC<InfoBuyProps> = (props) => {
                                     <li key={subIndex}>{contentItem.title}</li>
                                 ))}
                             </ul>
-                            {item.voiceMessage && <VoiceMessage />}
+                            {item.voiceMessage && (
+                                <VoiceMessage item={item.voiceMessage} isVisible={visibleIndex === index} />
+                            )}
                             {item.bonus && (
                                 <div>
                                     <div style={{ marginBottom: '12px', marginTop: '12px' }}>
