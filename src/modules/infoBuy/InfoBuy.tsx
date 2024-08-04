@@ -13,6 +13,7 @@ import { ICourseCard } from '@/utils/types/courses'
 import { IManuals, Manuals, ManualsGetResponse } from '@/utils/types/manuals'
 import { GetCheckPayResponse } from '@/utils/types/pay'
 
+import { VoiceMessage } from '../voiceMessage/voiceMessage'
 import css from './InfoBuy.module.scss'
 
 export type InfoBuyProps = {
@@ -105,6 +106,9 @@ export const InfoBuy: FC<InfoBuyProps> = (props) => {
                                     <li key={subIndex}>{contentItem.title}</li>
                                 ))}
                             </ul>
+                            {item.voiceMessage && (
+                                <VoiceMessage item={item.voiceMessage} isVisible={visibleIndex === index} />
+                            )}
                             {item.bonus && (
                                 <div>
                                     <div style={{ marginBottom: '12px', marginTop: '12px' }}>
