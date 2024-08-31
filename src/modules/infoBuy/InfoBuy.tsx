@@ -1,20 +1,20 @@
-import { FC, ReactNode, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { FC, ReactNode, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { ThunkDispatch } from '@reduxjs/toolkit'
+import { ThunkDispatch } from '@reduxjs/toolkit';
 
-import { BonusInfoBuy } from '@/modules/bonus/BonusInfoBuy'
-import PDFViewer from '@/modules/pdfViewer/PDFViewer'
-import { manualsGet } from '@/store/manualsGetSlice'
-import { useBackButton } from '@/utils/hooks/useBackButton'
-import { IBookBlock } from '@/utils/types/book'
-import { ICourseCard } from '@/utils/types/courses'
-import { IManuals, Manuals, ManualsGetResponse } from '@/utils/types/manuals'
-import { GetCheckPayResponse } from '@/utils/types/pay'
+import { BonusInfoBuy } from '@/modules/bonus/BonusInfoBuy';
+import PDFViewer from '@/modules/pdfViewer/PDFViewer';
+import { manualsGet } from '@/store/manualsGetSlice';
+import { useBackButton } from '@/utils/hooks/useBackButton';
+import { IBookBlock } from '@/utils/types/book';
+import { ICourseCard } from '@/utils/types/courses';
+import { IManuals, Manuals, ManualsGetResponse } from '@/utils/types/manuals';
+import { GetCheckPayResponse } from '@/utils/types/pay';
 
-import { VoiceMessage } from '../voiceMessage/voiceMessage'
-import css from './InfoBuy.module.scss'
+import { VoiceMessage } from '../voiceMessage/voiceMessage';
+import css from './InfoBuy.module.scss';
 
 export type InfoBuyProps = {
     children?: ReactNode;
@@ -72,6 +72,10 @@ export const InfoBuy: FC<InfoBuyProps> = (props) => {
         setIsIdInManualIdList(manualIdList.includes(Number(id)));
     }, [id, manualIdList]);
 
+    const sendUserToLink = (link: string) => {
+        window.location.href = link;
+    };
+
     const ArrowIcon = ({ isVisible }: { isVisible: boolean }) => (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -118,7 +122,11 @@ export const InfoBuy: FC<InfoBuyProps> = (props) => {
                                 </div>
                             )}
                             <div className={css.voiceMessage}></div>
-                            <button className={css.button} type="button">
+                            <button
+                                className={css.button}
+                                type="button"
+                                onClick={() => sendUserToLink(item.clientResult)}
+                            >
                                 Тут клиенты о результатах
                             </button>
                         </div>

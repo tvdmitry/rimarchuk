@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
 
 export interface IBookContentList {
     title: string;
@@ -14,6 +14,7 @@ export interface IBook {
     descriptionPrice?: string;
     bonus?: boolean;
     voiceMessage?: string;
+    clientResult?: string;
 }
 
 export interface IBookBlock {
