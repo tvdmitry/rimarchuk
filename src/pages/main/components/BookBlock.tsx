@@ -1,14 +1,14 @@
-import { SwiperSlide } from 'swiper/react'
+import { SwiperSlide } from 'swiper/react';
 
-import bookOneSrc from '@/assets/images/bookBlock/book.png'
-import bookFourSrc from '@/assets/images/bookBlock/bookFour.png'
-import bookThree from '@/assets/images/bookBlock/bookThree.png'
-import bookTwoSrc from '@/assets/images/bookBlock/bookTwo.png'
-import CardSlider from '@/modules/slider/CardSlider'
-import { IBookBlock } from '@/utils/types/book'
+import bookOneSrc from '@/assets/images/bookBlock/book.png';
+import bookFourSrc from '@/assets/images/bookBlock/bookFour.png';
+import bookThree from '@/assets/images/bookBlock/bookThree.png';
+import bookTwoSrc from '@/assets/images/bookBlock/bookTwo.png';
+import CardSlider from '@/modules/slider/CardSlider';
+import { IBookBlock } from '@/utils/types/book';
 
-import css from './BookBlock.module.scss'
-import { BookCard } from './parts/BookCard'
+import css from './BookBlock.module.scss';
+import { BookCard } from './parts/BookCard';
 
 export const data: IBookBlock[] = [
     {
@@ -53,6 +53,7 @@ export const data: IBookBlock[] = [
                 buttonBuy: 'Купить',
                 bonus: false,
                 voiceMessage: 'https://content-water.plutus-fin.ru/VoiceMessages/Личная программа с сопр.2 месяца.ogg',
+                clientResult: 'https://t.me/resultrimarchuk',
             },
             {
                 contentTitle: 'КОНСУЛЬТАЦИЯ И РАЗБОР АНАЛИЗОВ',
@@ -75,6 +76,7 @@ export const data: IBookBlock[] = [
                 buttonBuy: 'Купить',
                 descriptionPrice: 'Стоимость',
                 voiceMessage: 'https://content-water.plutus-fin.ru/VoiceMessages/Консультация и разбор анализов.ogg',
+                clientResult: 'https://t.me/resultrimarchuk',
             },
             {
                 contentTitle: 'ЛИЧНАЯ ПРОГРАММА ‌БЕЗ СОПРОВОЖДЕНИЯ',
@@ -94,6 +96,7 @@ export const data: IBookBlock[] = [
                 descriptionPrice: 'Стоимость',
                 voiceMessage:
                     'https://content-water.plutus-fin.ru/VoiceMessages/Личная программа без сопровождения.ogg',
+                clientResult: 'https://t.me/resultrimarchuk',
             },
             {
                 contentTitle:
@@ -114,6 +117,7 @@ export const data: IBookBlock[] = [
                 descriptionPrice: 'Стоимость',
                 voiceMessage:
                     'https://content-water.plutus-fin.ru/VoiceMessages/Личная программа с сопровождением 1 месяц.ogg',
+                clientResult: 'https://t.me/resultrimarchuk',
             },
         ],
         title: 'Личная консультация от Марины Римарчук',
@@ -150,6 +154,7 @@ export const data: IBookBlock[] = [
                 buttonText: 'Стоимость',
                 buttonBuy: 'Купить',
                 bonus: false,
+                clientResult: 'https://t.me/resultrimarchuk',
             },
             {
                 contentTitle: 'ЛИЧНАЯ ПРОГРАММА С СОПРОВОЖДЕНИЕМ 1 МЕСЯЦ',
@@ -176,6 +181,7 @@ export const data: IBookBlock[] = [
                 price: '15 990',
                 buttonBuy: 'Купить',
                 buttonText: 'Купить',
+                clientResult: 'https://t.me/resultrimarchuk',
             },
         ],
     },
