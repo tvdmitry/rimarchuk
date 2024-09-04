@@ -68,22 +68,13 @@ export const VoiceMessage: FC<VoiceMessageProps> = ({ item, isVisible }) => {
 
     return (
         <div className={css.voiceMessage}>
-            {isFallback ? (
-                <audio controls>
-                    <source src={item} type="audio/ogg" />
-                    Your browser does not support the audio element.
-                </audio>
-            ) : (
-                <>
-                    <button className={css.playButton} onClick={togglePlayPause}>
-                        {isPlaying ? <VoicePlay /> : <VoiceStop />}
-                    </button>
-                    <div className={css.info}>
-                        <div className={css.title}>Марина Римарчук</div>
-                        <div className={css.text}>Голосовое сообщение</div>
-                    </div>
-                </>
-            )}
+            <button className={css.playButton} onClick={togglePlayPause}>
+                {isPlaying ? <VoicePlay /> : <VoiceStop />}
+            </button>
+            <div className={css.info}>
+                <div className={css.title}>Марина Римарчук</div>
+                <div className={css.text}>Голосовое сообщение</div>
+            </div>
         </div>
     );
 };

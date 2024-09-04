@@ -52,7 +52,8 @@ export const data: IBookBlock[] = [
                 buttonText: 'Купить',
                 buttonBuy: 'Купить',
                 bonus: false,
-                voiceMessage: 'https://content-water.plutus-fin.ru/VoiceMessages/Личная программа с сопр.2 месяца.ogg',
+                voiceMessage:
+                    'https://content-water.plutus-fin.ru/VoiceMessages/Личная программа с сопр.2 месяца.ogg--online-audio-convert.com.mp3',
                 clientResult: 'https://t.me/resultrimarchuk',
             },
             {
@@ -75,7 +76,8 @@ export const data: IBookBlock[] = [
                 buttonText: 'Купить',
                 buttonBuy: 'Купить',
                 descriptionPrice: 'Стоимость',
-                voiceMessage: 'https://content-water.plutus-fin.ru/VoiceMessages/Консультация и разбор анализов.ogg',
+                voiceMessage:
+                    'https://content-water.plutus-fin.ru/VoiceMessages/Консультация и разбор анализов--online-audio-convert.com.mp3',
                 clientResult: 'https://t.me/resultrimarchuk',
             },
             {
@@ -95,7 +97,7 @@ export const data: IBookBlock[] = [
                 buttonBuy: 'Купить',
                 descriptionPrice: 'Стоимость',
                 voiceMessage:
-                    'https://content-water.plutus-fin.ru/VoiceMessages/Личная программа без сопровождения.ogg',
+                    'https://content-water.plutus-fin.ru/VoiceMessages/Личная программа без сопровождения--online-audio-convert.com.mp3',
                 clientResult: 'https://t.me/resultrimarchuk',
             },
             {
@@ -116,7 +118,7 @@ export const data: IBookBlock[] = [
                 buttonBuy: 'Купить',
                 descriptionPrice: 'Стоимость',
                 voiceMessage:
-                    'https://content-water.plutus-fin.ru/VoiceMessages/Личная программа с сопровождением 1 месяц.ogg',
+                    'https://content-water.plutus-fin.ru/VoiceMessages/Личная программа с сопровождением 1 месяц--online-audio-convert.com.mp3',
                 clientResult: 'https://t.me/resultrimarchuk',
             },
         ],
